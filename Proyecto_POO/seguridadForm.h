@@ -245,12 +245,11 @@ namespace ProyectoPOO {
 			// 
 			this->dgvInformacion->Location = System::Drawing::Point(20, 20);
 			this->dgvInformacion->Size = System::Drawing::Size(650, 220);
-			this->dgvInformacion->ColumnCount = 5;
-			this->dgvInformacion->Columns[0]->Name = L"Nombre";
-			this->dgvInformacion->Columns[1]->Name = L"Cédula";
-			this->dgvInformacion->Columns[2]->Name = L"Teléfono";
-			this->dgvInformacion->Columns[3]->Name = L"Turno";
-			this->dgvInformacion->Columns[4]->Name = L"Lugar";
+			this->dgvInformacion->Columns->Add(L"Nombre", L"Nombre");
+			this->dgvInformacion->Columns->Add(L"Cedula", L"Cédula");
+			this->dgvInformacion->Columns->Add(L"Telefono", L"Teléfono");
+			this->dgvInformacion->Columns->Add(L"Turno", L"Turno");
+			this->dgvInformacion->Columns->Add(L"Lugar", L"Lugar");
 			this->dgvInformacion->AllowUserToAddRows = false;
 			this->dgvInformacion->ReadOnly = true;
 			this->dgvInformacion->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
@@ -262,10 +261,9 @@ namespace ProyectoPOO {
 			// 
 			this->dgvLugar->Location = System::Drawing::Point(20, 20);
 			this->dgvLugar->Size = System::Drawing::Size(650, 220);
-			this->dgvLugar->ColumnCount = 3;
-			this->dgvLugar->Columns[0]->Name = L"Empleado";
-			this->dgvLugar->Columns[1]->Name = L"Lugar de trabajo";
-			this->dgvLugar->Columns[2]->Name = L"Turno";
+			this->dgvLugar->Columns->Add(L"Empleado", L"Empleado");
+			this->dgvLugar->Columns->Add(L"LugarTrabajo", L"Lugar de trabajo");
+			this->dgvLugar->Columns->Add(L"Turno", L"Turno");
 			this->dgvLugar->AllowUserToAddRows = false;
 			this->dgvLugar->ReadOnly = true;
 			this->dgvLugar->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
