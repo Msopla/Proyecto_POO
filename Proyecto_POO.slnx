@@ -3,5 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="Instalador_Hospital/Instalador_Hospital.vdproj" Type="Installer" />
   <Project Path="Proyecto_POO/Proyecto_POO.vcxproj" />
 </Solution>
