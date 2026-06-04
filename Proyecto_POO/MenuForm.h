@@ -81,18 +81,20 @@ namespace ProyectoPOO {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 48, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(256, 95);
+			this->label1->Location = System::Drawing::Point(192, 77);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(225, 90);
+			this->label1->Size = System::Drawing::Size(181, 73);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Menu";
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(47, 218);
+			this->pictureBox1->Location = System::Drawing::Point(35, 177);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(157, 136);
+			this->pictureBox1->Size = System::Drawing::Size(118, 110);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
@@ -102,9 +104,10 @@ namespace ProyectoPOO {
 			// 
 			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
 			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox2->Location = System::Drawing::Point(292, 218);
+			this->pictureBox2->Location = System::Drawing::Point(219, 177);
+			this->pictureBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(174, 136);
+			this->pictureBox2->Size = System::Drawing::Size(130, 110);
 			this->pictureBox2->TabIndex = 2;
 			this->pictureBox2->TabStop = false;
 			// 
@@ -112,9 +115,10 @@ namespace ProyectoPOO {
 			// 
 			this->pictureBox3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.BackgroundImage")));
 			this->pictureBox3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox3->Location = System::Drawing::Point(530, 218);
+			this->pictureBox3->Location = System::Drawing::Point(398, 177);
+			this->pictureBox3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(166, 135);
+			this->pictureBox3->Size = System::Drawing::Size(124, 110);
 			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox3->TabIndex = 3;
 			this->pictureBox3->TabStop = false;
@@ -123,9 +127,10 @@ namespace ProyectoPOO {
 			// 
 			this->Paciente->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Paciente->Location = System::Drawing::Point(47, 390);
+			this->Paciente->Location = System::Drawing::Point(35, 317);
+			this->Paciente->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Paciente->Name = L"Paciente";
-			this->Paciente->Size = System::Drawing::Size(157, 55);
+			this->Paciente->Size = System::Drawing::Size(118, 45);
 			this->Paciente->TabIndex = 4;
 			this->Paciente->Text = L"Paciente";
 			this->Paciente->UseVisualStyleBackColor = true;
@@ -135,9 +140,10 @@ namespace ProyectoPOO {
 			// 
 			this->seguridad->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->seguridad->Location = System::Drawing::Point(292, 392);
+			this->seguridad->Location = System::Drawing::Point(219, 318);
+			this->seguridad->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->seguridad->Name = L"seguridad";
-			this->seguridad->Size = System::Drawing::Size(173, 53);
+			this->seguridad->Size = System::Drawing::Size(130, 43);
 			this->seguridad->TabIndex = 5;
 			this->seguridad->Text = L"Seguridad";
 			this->seguridad->UseVisualStyleBackColor = true;
@@ -147,9 +153,10 @@ namespace ProyectoPOO {
 			// 
 			this->Personal->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Personal->Location = System::Drawing::Point(530, 392);
+			this->Personal->Location = System::Drawing::Point(398, 318);
+			this->Personal->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Personal->Name = L"Personal";
-			this->Personal->Size = System::Drawing::Size(166, 53);
+			this->Personal->Size = System::Drawing::Size(124, 43);
 			this->Personal->TabIndex = 6;
 			this->Personal->Text = L"Personal";
 			this->Personal->UseVisualStyleBackColor = true;
@@ -157,10 +164,10 @@ namespace ProyectoPOO {
 			// 
 			// MenuForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ButtonShadow;
-			this->ClientSize = System::Drawing::Size(768, 522);
+			this->ClientSize = System::Drawing::Size(600, 435);
 			this->Controls->Add(this->Personal);
 			this->Controls->Add(this->seguridad);
 			this->Controls->Add(this->Paciente);
@@ -168,6 +175,7 @@ namespace ProyectoPOO {
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"MenuForm";
 			this->Text = L"MenuForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();

@@ -9,9 +9,7 @@ namespace ProyectoPOO {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Resumen de pacienteForm
-	/// </summary>
+	
 	public ref class pacienteForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -22,9 +20,7 @@ namespace ProyectoPOO {
 		}
 
 	protected:
-		/// <summary>
-		/// Limpiar los recursos que se estén usando.
-		/// </summary>
+		
 		~pacienteForm()
 		{
 			if (components)
@@ -59,22 +55,18 @@ namespace ProyectoPOO {
 	private: System::Windows::Forms::DataGridView^ dataGridViewInformacion;
 	private: System::Windows::Forms::Label^ labelTitulo;
 	private: System::Windows::Forms::Label^ labelMensaje;
+	private: System::Windows::Forms::Button^ buttonAtras;
 	private: int idCounter;
 
 	protected:
 
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
+		
 		System::ComponentModel::Container ^components;
 		System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>^ pacientes;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
-		/// </summary>
+		
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(pacienteForm::typeid));
@@ -105,6 +97,7 @@ namespace ProyectoPOO {
 			this->labelMensaje = (gcnew System::Windows::Forms::Label());
 			this->dataGridViewPacientes = (gcnew System::Windows::Forms::DataGridView());
 			this->dataGridViewInformacion = (gcnew System::Windows::Forms::DataGridView());
+			this->buttonAtras = (gcnew System::Windows::Forms::Button());
 			this->tabControl1->SuspendLayout();
 			this->tabIngresar->SuspendLayout();
 			this->tabVer->SuspendLayout();
@@ -403,13 +396,27 @@ namespace ProyectoPOO {
 			this->dataGridViewInformacion->Size = System::Drawing::Size(700, 490);
 			this->dataGridViewInformacion->TabIndex = 0;
 			// 
+			// buttonAtras
+			// 
+			this->buttonAtras->BackColor = System::Drawing::SystemColors::MenuHighlight;
+			this->buttonAtras->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->buttonAtras->Location = System::Drawing::Point(12, 478);
+			this->buttonAtras->Name = L"buttonAtras";
+			this->buttonAtras->Size = System::Drawing::Size(100, 35);
+			this->buttonAtras->TabIndex = 1;
+			this->buttonAtras->Text = L"Atras";
+			this->buttonAtras->UseVisualStyleBackColor = false;
+			this->buttonAtras->Click += gcnew System::EventHandler(this, &pacienteForm::buttonAtras_Click);
+			// 
 			// pacienteForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(714, 525);
+			this->Controls->Add(this->buttonAtras);
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"pacienteForm";
 			this->Text = L"pacienteForm";
@@ -541,6 +548,11 @@ namespace ProyectoPOO {
 
 			this->dataGridViewInformacion->Rows->Add(row);
 		}
+	}
+	private: System::Void buttonAtras_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Cerrar el formulario y volver a MenuForm
+		this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+		this->Close();
 	}
 	};
 }

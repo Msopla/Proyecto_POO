@@ -52,9 +52,13 @@ namespace ProyectoPOO {
 			// 
 			// seguridadForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(672, 526);
+			this->BackColor = System::Drawing::SystemColors::ActiveBorder;
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->ClientSize = System::Drawing::Size(766, 462);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"seguridadForm";
 			this->Text = L"seguridadForm";
 			this->ResumeLayout(false);
