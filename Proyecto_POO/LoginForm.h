@@ -43,7 +43,7 @@ namespace ProyectoPOO {
 
 	private:
 
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 
@@ -114,7 +114,7 @@ namespace ProyectoPOO {
 			// 
 			// buttonLogin
 			// 
-			this->buttonLogin->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(0), static_cast<System::Byte>(102), 
+			this->buttonLogin->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(0), static_cast<System::Byte>(102),
 				static_cast<System::Byte>(204));
 			this->buttonLogin->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -129,7 +129,7 @@ namespace ProyectoPOO {
 			// 
 			// buttonRegistrar
 			// 
-			this->buttonRegistrar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(0), static_cast<System::Byte>(153), 
+			this->buttonRegistrar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(0), static_cast<System::Byte>(153),
 				static_cast<System::Byte>(76));
 			this->buttonRegistrar->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -157,7 +157,7 @@ namespace ProyectoPOO {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(240), static_cast<System::Byte>(240), 
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(240), static_cast<System::Byte>(240),
 				static_cast<System::Byte>(240));
 			this->ClientSize = System::Drawing::Size(676, 402);
 			this->Controls->Add(this->labelMensaje);

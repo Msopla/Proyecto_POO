@@ -52,14 +52,18 @@ namespace ProyectoPOO {
 			// 
 			// PersonalForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(711, 536);
+			this->ClientSize = System::Drawing::Size(791, 447);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"PersonalForm";
 			this->Text = L"PersonalForm";
+			this->Load += gcnew System::EventHandler(this, &PersonalForm::PersonalForm_Load);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
+	private: System::Void PersonalForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
 	};
 }

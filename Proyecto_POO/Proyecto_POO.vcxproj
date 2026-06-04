@@ -139,7 +139,9 @@
     <ClCompile Include="seguridadForm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LoginForm.h" />
+    <ClInclude Include="LoginForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="mainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -155,13 +157,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="mainForm.resx">
       <DependentUpon>mainForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuForm.resx">
       <DependentUpon>MenuForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pacienteForm.resx" />
     <EmbeddedResource Include="PersonalForm.resx">
       <DependentUpon>PersonalForm.h</DependentUpon>
     </EmbeddedResource>
