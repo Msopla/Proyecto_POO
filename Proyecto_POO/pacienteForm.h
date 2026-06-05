@@ -437,15 +437,15 @@ namespace ProyectoPOO {
 #pragma endregion
     private: System::Void buttonAgregar_Click(System::Object^ sender, System::EventArgs^ e) {
         // Validar campos vacíos
-        if (this->textBoxCedula->Text->Length == 0 ||
-            this->textBoxNombre->Text->Length == 0 ||
-            this->textBoxCorreo->Text->Length == 0 ||
-            this->textBoxMotivo->Text->Length == 0 ||
+        if (this->textBoxCedula->Text->Trim()->Length == 0 ||
+            this->textBoxNombre->Text->Trim()->Length == 0 ||
+            this->textBoxCorreo->Text->Trim()->Length == 0 ||
+            this->textBoxMotivo->Text->Trim()->Length == 0 ||
             this->comboBoxSangre->SelectedIndex == -1 ||
-            this->textBoxAlergias->Text->Length == 0 ||
-            this->textBoxEnfermedades->Text->Length == 0 ||
-            this->textBoxSeguro->Text->Length == 0 ||
-            this->textBoxMedico->Text->Length == 0) {
+            this->textBoxAlergias->Text->Trim()->Length == 0 ||
+            this->textBoxEnfermedades->Text->Trim()->Length == 0 ||
+            this->textBoxSeguro->Text->Trim()->Length == 0 ||
+            this->textBoxMedico->Text->Trim()->Length == 0) {
             this->labelMensaje->ForeColor = System::Drawing::Color::Red;
             this->labelMensaje->Text = L"Por favor, complete todos los campos";
             return;
@@ -458,23 +458,26 @@ namespace ProyectoPOO {
         // Crear un diccionario con los datos del paciente
         auto paciente = gcnew System::Collections::Generic::Dictionary<System::String^, System::String^>();
         paciente[L"id"] = id;
-        paciente[L"cedula"] = this->textBoxCedula->Text;
-        paciente[L"nombre"] = this->textBoxNombre->Text;
-        paciente[L"correo"] = this->textBoxCorreo->Text;
-        paciente[L"motivo"] = this->textBoxMotivo->Text;
+        paciente[L"cedula"] = this->textBoxCedula->Text->Trim();
+        paciente[L"nombre"] = this->textBoxNombre->Text->Trim();
+        paciente[L"correo"] = this->textBoxCorreo->Text->Trim();
+        paciente[L"motivo"] = this->textBoxMotivo->Text->Trim();
         paciente[L"sangre"] = this->comboBoxSangre->SelectedItem->ToString();
-        paciente[L"alergias"] = this->textBoxAlergias->Text;
-        paciente[L"enfermedades"] = this->textBoxEnfermedades->Text;
-        paciente[L"seguro"] = this->textBoxSeguro->Text;
-        paciente[L"medico"] = this->textBoxMedico->Text;
+        paciente[L"alergias"] = this->textBoxAlergias->Text->Trim();
+        paciente[L"enfermedades"] = this->textBoxEnfermedades->Text->Trim();
+        paciente[L"seguro"] = this->textBoxSeguro->Text->Trim();
+        paciente[L"medico"] = this->textBoxMedico->Text->Trim();
         paciente[L"estado"] = L"Activo";
 
         // Agregar a la lista
         this->pacientes->Add(paciente);
 
-        // Mostrar mensaje de éxito
+        // Guardar inmediatamente para que UsuariosForm pueda encontrar el paciente
+        GuardarPacientes();
+
+        // Mostrar mensaje de exito
         this->labelMensaje->ForeColor = System::Drawing::Color::Green;
-        this->labelMensaje->Text = L"Paciente #" + id + L" agregado exitosamente";
+        this->labelMensaje->Text = L"Paciente #" + id + L" guardado exitosamente";
 
         // Limpiar campos
         this->textBoxCedula->Clear();
