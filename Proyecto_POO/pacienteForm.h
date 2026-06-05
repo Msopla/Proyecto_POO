@@ -175,7 +175,7 @@ namespace ProyectoPOO {
             // labelTitulo
             // 
             this->labelTitulo->AutoSize = true;
-            this->labelTitulo->Font = (gcnew System::Drawing::Font(L"Arial", 16, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+            this->labelTitulo->Font = (gcnew System::Drawing::Font(L"Times New Roman", 16, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelTitulo->Location = System::Drawing::Point(120, 10);
             this->labelTitulo->Name = L"labelTitulo";
@@ -186,7 +186,7 @@ namespace ProyectoPOO {
             // labelCedula
                 // 
             this->labelCedula->AutoSize = true;
-            this->labelCedula->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelCedula->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelCedula->Location = System::Drawing::Point(15, 55);
             this->labelCedula->Name = L"labelCedula";
@@ -204,7 +204,7 @@ namespace ProyectoPOO {
             // labelNombre
             // 
             this->labelNombre->AutoSize = true;
-            this->labelNombre->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelNombre->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelNombre->Location = System::Drawing::Point(15, 90);
             this->labelNombre->Name = L"labelNombre";
@@ -222,7 +222,7 @@ namespace ProyectoPOO {
             // labelCorreo
             // 
             this->labelCorreo->AutoSize = true;
-            this->labelCorreo->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelCorreo->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelCorreo->Location = System::Drawing::Point(15, 125);
             this->labelCorreo->Name = L"labelCorreo";
@@ -240,7 +240,7 @@ namespace ProyectoPOO {
             // labelMotivo
             // 
             this->labelMotivo->AutoSize = true;
-            this->labelMotivo->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelMotivo->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelMotivo->Location = System::Drawing::Point(15, 160);
             this->labelMotivo->Name = L"labelMotivo";
@@ -258,7 +258,7 @@ namespace ProyectoPOO {
             // labelSangre
             // 
             this->labelSangre->AutoSize = true;
-            this->labelSangre->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelSangre->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelSangre->Location = System::Drawing::Point(420, 55);
             this->labelSangre->Name = L"labelSangre";
@@ -279,7 +279,7 @@ namespace ProyectoPOO {
             // labelAlergias
             // 
             this->labelAlergias->AutoSize = true;
-            this->labelAlergias->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelAlergias->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelAlergias->Location = System::Drawing::Point(420, 90);
             this->labelAlergias->Name = L"labelAlergias";
@@ -297,7 +297,7 @@ namespace ProyectoPOO {
             // labelEnfermedades
             // 
             this->labelEnfermedades->AutoSize = true;
-            this->labelEnfermedades->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelEnfermedades->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelEnfermedades->Location = System::Drawing::Point(420, 125);
             this->labelEnfermedades->Name = L"labelEnfermedades";
@@ -315,7 +315,7 @@ namespace ProyectoPOO {
             // labelSeguro
             // 
             this->labelSeguro->AutoSize = true;
-            this->labelSeguro->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelSeguro->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelSeguro->Location = System::Drawing::Point(420, 160);
             this->labelSeguro->Name = L"labelSeguro";
@@ -333,7 +333,7 @@ namespace ProyectoPOO {
             // labelMedico
                 // 
             this->labelMedico->AutoSize = true;
-            this->labelMedico->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelMedico->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelMedico->Location = System::Drawing::Point(420, 195);
             this->labelMedico->Name = L"labelMedico";
@@ -351,7 +351,7 @@ namespace ProyectoPOO {
             // buttonAgregar
             // 
             this->buttonAgregar->BackColor = System::Drawing::SystemColors::MenuHighlight;
-            this->buttonAgregar->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+            this->buttonAgregar->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->buttonAgregar->Location = System::Drawing::Point(280, 250);
             this->buttonAgregar->Name = L"buttonAgregar";
@@ -364,7 +364,7 @@ namespace ProyectoPOO {
             // labelMensaje
             // 
             this->labelMensaje->AutoSize = true;
-            this->labelMensaje->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->labelMensaje->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->labelMensaje->ForeColor = System::Drawing::Color::Green;
             this->labelMensaje->Location = System::Drawing::Point(200, 310);
@@ -401,7 +401,7 @@ namespace ProyectoPOO {
             // buttonAtras
             // 
             this->buttonAtras->BackColor = System::Drawing::SystemColors::MenuHighlight;
-            this->buttonAtras->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+            this->buttonAtras->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->buttonAtras->Location = System::Drawing::Point(12, 478);
             this->buttonAtras->Name = L"buttonAtras";
@@ -415,6 +415,7 @@ namespace ProyectoPOO {
             // 
             this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 
             this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
             this->ClientSize = System::Drawing::Size(714, 525);
