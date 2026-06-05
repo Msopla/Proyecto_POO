@@ -20,6 +20,7 @@ namespace ProyectoPOO {
 		{
 			InitializeComponent();
 			this->usuarios = gcnew System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>();
+			this->archivoUsuarios = L"usuarios.dat";
 		}
 
 	protected:
@@ -41,6 +42,7 @@ namespace ProyectoPOO {
 	private: System::Windows::Forms::Button^ buttonRegistrar;
 	private: System::Windows::Forms::Label^ labelMensaje;
 	private: System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>^ usuarios;
+	private: System::String^ archivoUsuarios;
 
 	private:
 
@@ -64,7 +66,7 @@ namespace ProyectoPOO {
 			// labelTitulo
 			// 
 			this->labelTitulo->AutoSize = true;
-			this->labelTitulo->Font = (gcnew System::Drawing::Font(L"Arial", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->labelTitulo->Font = (gcnew System::Drawing::Font(L"Times New Roman", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->labelTitulo->Location = System::Drawing::Point(267, 37);
 			this->labelTitulo->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
@@ -88,7 +90,7 @@ namespace ProyectoPOO {
 			// labelContrasena
 			// 
 			this->labelContrasena->AutoSize = true;
-			this->labelContrasena->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->labelContrasena->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->labelContrasena->Location = System::Drawing::Point(200, 222);
 			this->labelContrasena->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
@@ -109,7 +111,7 @@ namespace ProyectoPOO {
 			// 
 			// textBoxContrasena
 			// 
-			this->textBoxContrasena->Font = (gcnew System::Drawing::Font(L"Arial", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->textBoxContrasena->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBoxContrasena->Location = System::Drawing::Point(333, 219);
 			this->textBoxContrasena->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
@@ -122,7 +124,7 @@ namespace ProyectoPOO {
 			// 
 			this->buttonLogin->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
 				static_cast<System::Int32>(static_cast<System::Byte>(204)));
-			this->buttonLogin->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->buttonLogin->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->buttonLogin->ForeColor = System::Drawing::Color::White;
 			this->buttonLogin->Location = System::Drawing::Point(267, 320);
@@ -138,7 +140,7 @@ namespace ProyectoPOO {
 			// 
 			this->buttonRegistrar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(153)),
 				static_cast<System::Int32>(static_cast<System::Byte>(76)));
-			this->buttonRegistrar->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->buttonRegistrar->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->buttonRegistrar->ForeColor = System::Drawing::Color::White;
 			this->buttonRegistrar->Location = System::Drawing::Point(493, 320);
@@ -153,7 +155,7 @@ namespace ProyectoPOO {
 			// labelMensaje
 			// 
 			this->labelMensaje->AutoSize = true;
-			this->labelMensaje->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->labelMensaje->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->labelMensaje->ForeColor = System::Drawing::Color::Red;
 			this->labelMensaje->Location = System::Drawing::Point(267, 406);
@@ -166,6 +168,7 @@ namespace ProyectoPOO {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(240)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 				static_cast<System::Int32>(static_cast<System::Byte>(240)));
 			this->ClientSize = System::Drawing::Size(901, 495);
@@ -187,8 +190,8 @@ namespace ProyectoPOO {
 		}
 #pragma endregion
 	private: System::Void buttonLogin_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ usuario = this->textBoxUsuario->Text;
-		String^ contrasena = this->textBoxContrasena->Text;
+		String^ usuario = this->textBoxUsuario->Text->Trim();
+		String^ contrasena = this->textBoxContrasena->Text->Trim();
 
 		// Validar campos vacios
 		if (usuario->Length == 0 || contrasena->Length == 0) {
@@ -234,8 +237,8 @@ namespace ProyectoPOO {
 		}
 	}
 	private: System::Void buttonRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ usuario = this->textBoxUsuario->Text;
-		String^ contrasena = this->textBoxContrasena->Text;
+		String^ usuario = this->textBoxUsuario->Text->Trim();
+		String^ contrasena = this->textBoxContrasena->Text->Trim();
 
 		// Validar campos vacios
 		if (usuario->Length == 0 || contrasena->Length == 0) {
@@ -265,6 +268,7 @@ namespace ProyectoPOO {
 		nuevoUsuario[L"usuario"] = usuario;
 		nuevoUsuario[L"contrasena"] = contrasena;
 		this->usuarios->Add(nuevoUsuario);
+		GuardarUsuarios();
 
 		// Enviar los usuarios registrados a la busqueda de pacientes
 		this->labelMensaje->ForeColor = System::Drawing::Color::Green;
@@ -275,7 +279,51 @@ namespace ProyectoPOO {
 
 		this->Close();
 	}
+	private: System::Void GuardarUsuarios() {
+		try {
+			System::IO::StreamWriter^ writer = gcnew System::IO::StreamWriter(this->archivoUsuarios, false, System::Text::Encoding::UTF8);
+			for each (auto user in this->usuarios) {
+				writer->WriteLine(user[L"usuario"] + L"|" + user[L"contrasena"]);
+			}
+			writer->Close();
+			delete writer;
+		}
+		catch (System::Exception^) {
+		}
+	}
+
+	private: System::Void CargarUsuarios() {
+		this->usuarios->Clear();
+
+		try {
+			if (System::IO::File::Exists(this->archivoUsuarios)) {
+				System::IO::StreamReader^ reader = gcnew System::IO::StreamReader(this->archivoUsuarios, System::Text::Encoding::UTF8);
+				System::String^ linea;
+
+				while ((linea = reader->ReadLine()) != nullptr) {
+					if (linea->Length == 0) {
+						continue;
+					}
+
+					array<System::String^>^ datos = linea->Split('|');
+					if (datos->Length == 2) {
+						auto usuarioGuardado = gcnew System::Collections::Generic::Dictionary<System::String^, System::String^>();
+						usuarioGuardado[L"usuario"] = datos[0];
+						usuarioGuardado[L"contrasena"] = datos[1];
+						this->usuarios->Add(usuarioGuardado);
+					}
+				}
+
+				reader->Close();
+				delete reader;
+			}
+		}
+		catch (System::Exception^) {
+		}
+	}
+
 	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		CargarUsuarios();
 	}
 };
 }
