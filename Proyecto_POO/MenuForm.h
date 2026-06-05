@@ -1,6 +1,6 @@
 #pragma once
 
-#include "UsuariosForm.h"
+#include "pacienteForm.h"
 #include "seguridadForm.h"
 #include "PersonalForm.h"
 namespace ProyectoPOO {
@@ -215,7 +215,7 @@ namespace ProyectoPOO {
 	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void Paciente_Click(System::Object^ sender, System::EventArgs^ e) {
-		UsuariosForm^ paciente = gcnew UsuariosForm();
+		pacienteForm^ paciente = gcnew pacienteForm();
 		paciente->ShowDialog();
 	}
 	private: System::Void seguridad_Click(System::Object^ sender, System::EventArgs^ e) {

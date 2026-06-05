@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MenuForm.h"
+#include "UsuariosForm.h"
 
 namespace ProyectoPOO {
 
@@ -205,14 +206,22 @@ namespace ProyectoPOO {
 			}
 		}
 
-		// Validar contra admin predeterminado
-		if ((usuario == L"admin" && contrasena == L"1234") || usuarioEncontrado) {
+		// Solo el admin puede abrir el menu del hospital
+		if (usuario == L"admin" && contrasena == L"12345") {
 			this->labelMensaje->ForeColor = System::Drawing::Color::Green;
 			this->labelMensaje->Text = L"Inicio de sesion exitoso!";
 
-			// Abrir MenuForm
 			MenuForm^ menu = gcnew MenuForm();
 			menu->ShowDialog();
+
+			this->Close();
+		}
+		else if (usuarioEncontrado) {
+			this->labelMensaje->ForeColor = System::Drawing::Color::Green;
+			this->labelMensaje->Text = L"Inicio de sesion exitoso!";
+
+			UsuariosForm^ usuarios = gcnew UsuariosForm();
+			usuarios->ShowDialog();
 
 			this->Close();
 		}
@@ -257,14 +266,14 @@ namespace ProyectoPOO {
 		nuevoUsuario[L"contrasena"] = contrasena;
 		this->usuarios->Add(nuevoUsuario);
 
-		// Mostrar mensaje de exito
+		// Enviar los usuarios registrados a la busqueda de pacientes
 		this->labelMensaje->ForeColor = System::Drawing::Color::Green;
-		this->labelMensaje->Text = L"Registro exitoso! Ahora inicia sesion";
+		this->labelMensaje->Text = L"Registro exitoso!";
 
-		// Limpiar campos
-		this->textBoxUsuario->Clear();
-		this->textBoxContrasena->Clear();
-		this->textBoxUsuario->Focus();
+		UsuariosForm^ usuarios = gcnew UsuariosForm();
+		usuarios->ShowDialog();
+
+		this->Close();
 	}
 	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}

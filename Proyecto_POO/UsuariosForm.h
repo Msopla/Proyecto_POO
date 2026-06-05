@@ -1,7 +1,5 @@
 #pragma once
 
-#include "pacienteForm.h"
-
 namespace ProyectoPOO {
 
     using namespace System;
@@ -33,7 +31,6 @@ namespace ProyectoPOO {
     private: System::Windows::Forms::Label^ labelCedula;
     private: System::Windows::Forms::TextBox^ textBoxCedula;
     private: System::Windows::Forms::Button^ buttonBuscar;
-    private: System::Windows::Forms::Button^ buttonRegistrar;
     private: System::Windows::Forms::Button^ buttonAtras;
     private: System::Windows::Forms::Label^ labelMensaje;
     private: System::Windows::Forms::Panel^ panelResultado;
@@ -52,7 +49,6 @@ namespace ProyectoPOO {
             this->labelCedula = (gcnew System::Windows::Forms::Label());
             this->textBoxCedula = (gcnew System::Windows::Forms::TextBox());
             this->buttonBuscar = (gcnew System::Windows::Forms::Button());
-            this->buttonRegistrar = (gcnew System::Windows::Forms::Button());
             this->buttonAtras = (gcnew System::Windows::Forms::Button());
             this->labelMensaje = (gcnew System::Windows::Forms::Label());
             this->panelResultado = (gcnew System::Windows::Forms::Panel());
@@ -106,20 +102,6 @@ namespace ProyectoPOO {
             this->buttonBuscar->Text = L"Buscar";
             this->buttonBuscar->UseVisualStyleBackColor = false;
             this->buttonBuscar->Click += gcnew System::EventHandler(this, &UsuariosForm::buttonBuscar_Click);
-            //
-            // buttonRegistrar
-            //
-            this->buttonRegistrar->BackColor = System::Drawing::Color::SeaGreen;
-            this->buttonRegistrar->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-                static_cast<System::Byte>(0)));
-            this->buttonRegistrar->ForeColor = System::Drawing::Color::White;
-            this->buttonRegistrar->Location = System::Drawing::Point(458, 432);
-            this->buttonRegistrar->Name = L"buttonRegistrar";
-            this->buttonRegistrar->Size = System::Drawing::Size(190, 38);
-            this->buttonRegistrar->TabIndex = 6;
-            this->buttonRegistrar->Text = L"Registrar paciente";
-            this->buttonRegistrar->UseVisualStyleBackColor = false;
-            this->buttonRegistrar->Click += gcnew System::EventHandler(this, &UsuariosForm::buttonRegistrar_Click);
             //
             // buttonAtras
             //
@@ -187,7 +169,6 @@ namespace ProyectoPOO {
             this->Controls->Add(this->panelResultado);
             this->Controls->Add(this->labelMensaje);
             this->Controls->Add(this->buttonAtras);
-            this->Controls->Add(this->buttonRegistrar);
             this->Controls->Add(this->buttonBuscar);
             this->Controls->Add(this->textBoxCedula);
             this->Controls->Add(this->labelCedula);
@@ -216,12 +197,6 @@ namespace ProyectoPOO {
             BuscarPacientePorCedula();
             e->SuppressKeyPress = true;
         }
-    }
-
-    private: System::Void buttonRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
-        pacienteForm^ registrar = gcnew pacienteForm();
-        registrar->ShowDialog();
-        CargarPacientes();
     }
 
     private: System::Void buttonAtras_Click(System::Object^ sender, System::EventArgs^ e) {
