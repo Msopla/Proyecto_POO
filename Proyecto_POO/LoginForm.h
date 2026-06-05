@@ -65,63 +65,69 @@ namespace ProyectoPOO {
 			this->labelTitulo->AutoSize = true;
 			this->labelTitulo->Font = (gcnew System::Drawing::Font(L"Arial", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->labelTitulo->Location = System::Drawing::Point(200, 30);
+			this->labelTitulo->Location = System::Drawing::Point(267, 37);
+			this->labelTitulo->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labelTitulo->Name = L"labelTitulo";
-			this->labelTitulo->Size = System::Drawing::Size(276, 46);
+			this->labelTitulo->Size = System::Drawing::Size(275, 46);
 			this->labelTitulo->TabIndex = 0;
 			this->labelTitulo->Text = L"Iniciar Sesion";
 			// 
 			// labelUsuario
 			// 
 			this->labelUsuario->AutoSize = true;
-			this->labelUsuario->Font = (gcnew System::Drawing::Font(L"times new roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->labelUsuario->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->labelUsuario->Location = System::Drawing::Point(150, 130);
+			this->labelUsuario->Location = System::Drawing::Point(200, 160);
+			this->labelUsuario->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labelUsuario->Name = L"labelUsuario";
-			this->labelUsuario->Size = System::Drawing::Size(65, 18);
+			this->labelUsuario->Size = System::Drawing::Size(78, 22);
 			this->labelUsuario->TabIndex = 1;
 			this->labelUsuario->Text = L"Usuario:";
-			// 
-			// textBoxUsuario
-			// 
-			this->textBoxUsuario->Font = (gcnew System::Drawing::Font(L"times new roman", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->textBoxUsuario->Location = System::Drawing::Point(250, 128);
-			this->textBoxUsuario->Name = L"textBoxUsuario";
-			this->textBoxUsuario->Size = System::Drawing::Size(250, 24);
-			this->textBoxUsuario->TabIndex = 2;
 			// 
 			// labelContrasena
 			// 
 			this->labelContrasena->AutoSize = true;
 			this->labelContrasena->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->labelContrasena->Location = System::Drawing::Point(150, 180);
+			this->labelContrasena->Location = System::Drawing::Point(200, 222);
+			this->labelContrasena->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labelContrasena->Name = L"labelContrasena";
-			this->labelContrasena->Size = System::Drawing::Size(85, 18);
+			this->labelContrasena->Size = System::Drawing::Size(117, 23);
 			this->labelContrasena->TabIndex = 3;
 			this->labelContrasena->Text = L"Contrasena:";
+			// 
+			// textBoxUsuario
+			// 
+			this->textBoxUsuario->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBoxUsuario->Location = System::Drawing::Point(333, 158);
+			this->textBoxUsuario->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->textBoxUsuario->Name = L"textBoxUsuario";
+			this->textBoxUsuario->Size = System::Drawing::Size(332, 29);
+			this->textBoxUsuario->TabIndex = 2;
 			// 
 			// textBoxContrasena
 			// 
 			this->textBoxContrasena->Font = (gcnew System::Drawing::Font(L"Arial", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->textBoxContrasena->Location = System::Drawing::Point(250, 178);
+			this->textBoxContrasena->Location = System::Drawing::Point(333, 219);
+			this->textBoxContrasena->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBoxContrasena->Name = L"textBoxContrasena";
-			this->textBoxContrasena->Size = System::Drawing::Size(250, 24);
+			this->textBoxContrasena->Size = System::Drawing::Size(332, 29);
 			this->textBoxContrasena->TabIndex = 4;
 			this->textBoxContrasena->UseSystemPasswordChar = true;
 			// 
 			// buttonLogin
 			// 
-			this->buttonLogin->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(0), static_cast<System::Byte>(102),
-				static_cast<System::Byte>(204));
+			this->buttonLogin->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(102)),
+				static_cast<System::Int32>(static_cast<System::Byte>(204)));
 			this->buttonLogin->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->buttonLogin->ForeColor = System::Drawing::Color::White;
-			this->buttonLogin->Location = System::Drawing::Point(200, 260);
+			this->buttonLogin->Location = System::Drawing::Point(267, 320);
+			this->buttonLogin->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->buttonLogin->Name = L"buttonLogin";
-			this->buttonLogin->Size = System::Drawing::Size(130, 45);
+			this->buttonLogin->Size = System::Drawing::Size(173, 55);
 			this->buttonLogin->TabIndex = 5;
 			this->buttonLogin->Text = L"Iniciar Sesion";
 			this->buttonLogin->UseVisualStyleBackColor = false;
@@ -129,14 +135,15 @@ namespace ProyectoPOO {
 			// 
 			// buttonRegistrar
 			// 
-			this->buttonRegistrar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(0), static_cast<System::Byte>(153),
-				static_cast<System::Byte>(76));
+			this->buttonRegistrar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(153)),
+				static_cast<System::Int32>(static_cast<System::Byte>(76)));
 			this->buttonRegistrar->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->buttonRegistrar->ForeColor = System::Drawing::Color::White;
-			this->buttonRegistrar->Location = System::Drawing::Point(370, 260);
+			this->buttonRegistrar->Location = System::Drawing::Point(493, 320);
+			this->buttonRegistrar->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->buttonRegistrar->Name = L"buttonRegistrar";
-			this->buttonRegistrar->Size = System::Drawing::Size(130, 45);
+			this->buttonRegistrar->Size = System::Drawing::Size(173, 55);
 			this->buttonRegistrar->TabIndex = 6;
 			this->buttonRegistrar->Text = L"Registrarse";
 			this->buttonRegistrar->UseVisualStyleBackColor = false;
@@ -148,18 +155,19 @@ namespace ProyectoPOO {
 			this->labelMensaje->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->labelMensaje->ForeColor = System::Drawing::Color::Red;
-			this->labelMensaje->Location = System::Drawing::Point(200, 330);
+			this->labelMensaje->Location = System::Drawing::Point(267, 406);
+			this->labelMensaje->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->labelMensaje->Name = L"labelMensaje";
-			this->labelMensaje->Size = System::Drawing::Size(0, 16);
+			this->labelMensaje->Size = System::Drawing::Size(0, 19);
 			this->labelMensaje->TabIndex = 7;
 			// 
 			// LoginForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Byte>(240), static_cast<System::Byte>(240),
-				static_cast<System::Byte>(240));
-			this->ClientSize = System::Drawing::Size(676, 402);
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(240)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
+				static_cast<System::Int32>(static_cast<System::Byte>(240)));
+			this->ClientSize = System::Drawing::Size(901, 495);
 			this->Controls->Add(this->labelMensaje);
 			this->Controls->Add(this->buttonRegistrar);
 			this->Controls->Add(this->buttonLogin);
@@ -168,8 +176,10 @@ namespace ProyectoPOO {
 			this->Controls->Add(this->textBoxUsuario);
 			this->Controls->Add(this->labelUsuario);
 			this->Controls->Add(this->labelTitulo);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"LoginForm";
 			this->Text = L"LoginForm";
+			this->Load += gcnew System::EventHandler(this, &LoginForm::LoginForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -256,5 +266,7 @@ namespace ProyectoPOO {
 		this->textBoxContrasena->Clear();
 		this->textBoxUsuario->Focus();
 	}
-	};
+	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }
