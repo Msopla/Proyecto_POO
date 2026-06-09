@@ -162,7 +162,7 @@ namespace ProyectoPOO {
             this->tabVer->Text = L"Ver Pacientes";
             // 
             // tabInformacion
-                // 
+            // 
             this->tabInformacion->BackColor = System::Drawing::SystemColors::ButtonShadow;
             this->tabInformacion->Controls->Add(this->dataGridViewInformacion);
             this->tabInformacion->Location = System::Drawing::Point(4, 25);
@@ -184,7 +184,7 @@ namespace ProyectoPOO {
             this->labelTitulo->Text = L"Ingresar Nuevo Paciente";
             // 
             // labelCedula
-                // 
+            // 
             this->labelCedula->AutoSize = true;
             this->labelCedula->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
@@ -331,7 +331,7 @@ namespace ProyectoPOO {
             this->textBoxSeguro->TabIndex = 16;
             // 
             // labelMedico
-                // 
+            // 
             this->labelMedico->AutoSize = true;
             this->labelMedico->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));

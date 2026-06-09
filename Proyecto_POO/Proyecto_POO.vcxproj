@@ -132,6 +132,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BloquearForm.cpp" />
     <ClCompile Include="mainForm.cpp" />
     <ClCompile Include="MenuForm.cpp" />
     <ClCompile Include="pacienteForm.cpp" />
@@ -140,6 +141,9 @@
     <ClCompile Include="UsuariosForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BloquearForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="LoginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -161,6 +165,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BloquearForm.resx">
+      <DependentUpon>BloquearForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.h</DependentUpon>
     </EmbeddedResource>
