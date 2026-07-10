@@ -129,63 +129,100 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BloquearForm.cpp" />
-    <ClCompile Include="mainForm.cpp" />
-    <ClCompile Include="MenuForm.cpp" />
-    <ClCompile Include="pacienteForm.cpp" />
-    <ClCompile Include="PersonalForm.cpp" />
-    <ClCompile Include="seguridadForm.cpp" />
-    <ClCompile Include="UsuariosForm.cpp" />
+    <ClCompile Include="Vistas\BloquearForm.cpp" />
+    <ClCompile Include="Vistas\mainForm.cpp" />
+    <ClCompile Include="Vistas\MenuForm.cpp" />
+    <ClCompile Include="Vistas\pacienteForm.cpp" />
+    <ClCompile Include="Vistas\PersonalForm.cpp" />
+    <ClCompile Include="Vistas\registroMForm.cpp" />
+    <ClCompile Include="Vistas\seguridadForm.cpp" />
+    <ClCompile Include="Vistas\UsuariosForm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BloquearForm.h">
+    <ClInclude Include="Vistas\BloquearForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="LoginForm.h">
+    <ClInclude Include="Vistas\LoginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="mainForm.h">
+    <ClInclude Include="Vistas\mainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="MenuForm.h">
+    <ClInclude Include="Vistas\MenuForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="pacienteForm.h" />
-    <ClInclude Include="PersonalForm.h">
+    <ClInclude Include="Vistas\pacienteForm.h" />
+    <ClInclude Include="Vistas\PersonalForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="seguridadForm.h">
+    <ClInclude Include="Vistas\registroMForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="UsuariosForm.h">
+    <ClInclude Include="Vistas\seguridadForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Vistas\UsuariosForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Modelos\EmpleadoSeguridad.h" />
+    <ClInclude Include="Modelos\Paciente.h" />
+    <ClInclude Include="Modelos\PersonalHospital.h" />
+    <ClInclude Include="Modelos\Medicamento.h" />
+    <ClInclude Include="Modelos\Usuario.h" />
+    <ClInclude Include="Modelos\UsuarioGestion.h" />
+    <ClInclude Include="Controladores\AutenticacionController.h" />
+    <ClInclude Include="Controladores\GestionUsuariosController.h" />
+    <ClInclude Include="Controladores\PacienteController.h" />
+    <ClInclude Include="Controladores\PersonalController.h" />
+    <ClInclude Include="Controladores\MedicamentoController.h" />
+    <ClInclude Include="Controladores\RutasDatos.h" />
+    <ClInclude Include="Controladores\SeguridadController.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BloquearForm.resx">
+    <EmbeddedResource Include="Vistas\BloquearForm.resx">
       <DependentUpon>BloquearForm.h</DependentUpon>
+      <LogicalName>ProyectoPOO.BloquearForm.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Vistas\LoginForm.resx">
       <DependentUpon>LoginForm.h</DependentUpon>
+      <LogicalName>ProyectoPOO.LoginForm.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="mainForm.resx">
+    <EmbeddedResource Include="Vistas\mainForm.resx">
       <DependentUpon>mainForm.h</DependentUpon>
+      <LogicalName>ProyectoPOO.mainForm.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuForm.resx">
+    <EmbeddedResource Include="Vistas\MenuForm.resx">
       <DependentUpon>MenuForm.h</DependentUpon>
+      <LogicalName>ProyectoPOO.MenuForm.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonalForm.resx">
+    <EmbeddedResource Include="Vistas\PersonalForm.resx">
       <DependentUpon>PersonalForm.h</DependentUpon>
+      <LogicalName>ProyectoPOO.PersonalForm.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="seguridadForm.resx">
+    <EmbeddedResource Include="Vistas\registroMForm.resx">
+      <DependentUpon>registroMForm.h</DependentUpon>
+      <LogicalName>ProyectoPOO.registroMForm.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\seguridadForm.resx">
       <DependentUpon>seguridadForm.h</DependentUpon>
+      <LogicalName>ProyectoPOO.seguridadForm.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="UsuariosForm.resx">
+    <EmbeddedResource Include="Vistas\UsuariosForm.resx">
       <DependentUpon>UsuariosForm.h</DependentUpon>
+      <LogicalName>ProyectoPOO.UsuariosForm.resources</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Datos\empleados_seguridad.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Datos\pacientes.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Controladores/SeguridadController.h"
+
 namespace ProyectoPOO {
 
 	using namespace System;
@@ -16,6 +18,7 @@ namespace ProyectoPOO {
 		seguridadForm(void)
 		{
 			InitializeComponent();
+			controlador = gcnew ProyectoPOO::Controladores::SeguridadController();
 		}
 
 	protected:
@@ -28,6 +31,7 @@ namespace ProyectoPOO {
 		}
 
 	private: System::Windows::Forms::Label^ label1;
+	private: ProyectoPOO::Controladores::SeguridadController^ controlador;
 
 	private: System::Windows::Forms::TabControl^ tabControl1;
 	private: System::Windows::Forms::TabPage^ tabAgregar;
@@ -117,13 +121,13 @@ namespace ProyectoPOO {
 			// 
 			// tabAgregar
 			// 
-			this->tabAgregar->Text = L"Agregar información";
+			this->tabAgregar->Text = L"Agregar informaciÃ³n";
 			this->tabAgregar->UseVisualStyleBackColor = true;
 
 			// 
 			// tabInformacion
 			// 
-			this->tabInformacion->Text = L"Ver información";
+			this->tabInformacion->Text = L"Ver informaciÃ³n";
 			this->tabInformacion->UseVisualStyleBackColor = true;
 
 			// 
@@ -152,7 +156,7 @@ namespace ProyectoPOO {
 			// 
 			// lblCedula
 			// 
-			this->lblCedula->Text = L"Cédula:";
+			this->lblCedula->Text = L"CÃ©dula:";
 			this->lblCedula->Location = System::Drawing::Point(40, 80);
 			this->lblCedula->Size = System::Drawing::Size(80, 25);
 
@@ -165,7 +169,7 @@ namespace ProyectoPOO {
 			// 
 			// lblTelefono
 			// 
-			this->lblTelefono->Text = L"Teléfono:";
+			this->lblTelefono->Text = L"TelÃ©fono:";
 			this->lblTelefono->Location = System::Drawing::Point(40, 125);
 			this->lblTelefono->Size = System::Drawing::Size(80, 25);
 
@@ -188,7 +192,7 @@ namespace ProyectoPOO {
 			this->cmbTurno->Location = System::Drawing::Point(480, 35);
 			this->cmbTurno->Size = System::Drawing::Size(160, 25);
 			this->cmbTurno->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->cmbTurno->Items->Add(L"Mañana");
+			this->cmbTurno->Items->Add(L"MaÃ±ana");
 			this->cmbTurno->Items->Add(L"Tarde");
 			this->cmbTurno->Items->Add(L"Noche");
 
@@ -246,8 +250,8 @@ namespace ProyectoPOO {
 			this->dgvInformacion->Location = System::Drawing::Point(20, 20);
 			this->dgvInformacion->Size = System::Drawing::Size(650, 220);
 			this->dgvInformacion->Columns->Add(L"Nombre", L"Nombre");
-			this->dgvInformacion->Columns->Add(L"Cedula", L"Cédula");
-			this->dgvInformacion->Columns->Add(L"Telefono", L"Teléfono");
+			this->dgvInformacion->Columns->Add(L"Cedula", L"CÃ©dula");
+			this->dgvInformacion->Columns->Add(L"Telefono", L"TelÃ©fono");
 			this->dgvInformacion->Columns->Add(L"Turno", L"Turno");
 			this->dgvInformacion->Columns->Add(L"Lugar", L"Lugar");
 			this->dgvInformacion->AllowUserToAddRows = false;
@@ -321,31 +325,16 @@ namespace ProyectoPOO {
 		}
 		else {
 
-			dgvInformacion->Rows->Add(
-				txtNombre->Text,
-				txtCedula->Text,
-				txtTelefono->Text,
-				cmbTurno->Text,
-				cmbLugar->Text
-			);
+			ProyectoPOO::Modelos::EmpleadoSeguridad^ empleado = gcnew ProyectoPOO::Modelos::EmpleadoSeguridad();
+			empleado->Nombre = txtNombre->Text->Trim();
+			empleado->Cedula = txtCedula->Text->Trim();
+			empleado->Telefono = txtTelefono->Text->Trim();
+			empleado->Turno = cmbTurno->Text;
+			empleado->Lugar = cmbLugar->Text;
+			controlador->Agregar(empleado);
 
-			dgvLugar->Rows->Add(
-				txtNombre->Text,
-				cmbLugar->Text,
-				cmbTurno->Text
-			);
-
-			StreamWriter^ archivo = gcnew StreamWriter("empleados_seguridad.txt", true);
-
-			archivo->WriteLine(
-				txtNombre->Text + ";" +
-				txtCedula->Text + ";" +
-				txtTelefono->Text + ";" +
-				cmbTurno->Text + ";" +
-				cmbLugar->Text
-			);
-
-			archivo->Close();
+			dgvInformacion->Rows->Add(empleado->Nombre, empleado->Cedula, empleado->Telefono, empleado->Turno, empleado->Lugar);
+			dgvLugar->Rows->Add(empleado->Nombre, empleado->Lugar, empleado->Turno);
 
 			MessageBox::Show("Empleado guardado correctamente.", "Registro exitoso",
 				MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -371,32 +360,12 @@ namespace ProyectoPOO {
 	}
 
 	private: System::Void CargarEmpleados() {
-
-		if (File::Exists("empleados_seguridad.txt")) {
-
-			array<String^>^ lineas = File::ReadAllLines("empleados_seguridad.txt");
-
-			for each (String ^ linea in lineas) {
-
-				array<String^>^ datos = linea->Split(';');
-
-				if (datos->Length == 5) {
-
-					dgvInformacion->Rows->Add(
-						datos[0],
-						datos[1],
-						datos[2],
-						datos[3],
-						datos[4]
-					);
-
-					dgvLugar->Rows->Add(
-						datos[0],
-						datos[4],
-						datos[3]
-					);
-				}
-			}
+		controlador->Recargar();
+		dgvInformacion->Rows->Clear();
+		dgvLugar->Rows->Clear();
+		for each (ProyectoPOO::Modelos::EmpleadoSeguridad^ empleado in controlador->ObtenerTodos()) {
+			dgvInformacion->Rows->Add(empleado->Nombre, empleado->Cedula, empleado->Telefono, empleado->Turno, empleado->Lugar);
+			dgvLugar->Rows->Add(empleado->Nombre, empleado->Lugar, empleado->Turno);
 		}
 	}
 	};

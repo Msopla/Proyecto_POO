@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Controladores/GestionUsuariosController.h"
+
 namespace ProyectoPOO {
 
 	using namespace System;
@@ -15,6 +17,7 @@ namespace ProyectoPOO {
 		BloquearForm(void)
 		{
 			InitializeComponent();
+			controlador = gcnew ProyectoPOO::Controladores::GestionUsuariosController();
 		}
 
 	protected:
@@ -28,6 +31,7 @@ namespace ProyectoPOO {
 
 	private:
 		System::ComponentModel::Container^ components;
+		ProyectoPOO::Controladores::GestionUsuariosController^ controlador;
 
 		System::Windows::Forms::TabControl^ tabControl1;
 		System::Windows::Forms::TabPage^ tabAgregar;
@@ -180,7 +184,7 @@ namespace ProyectoPOO {
 			this->lblTituloAgregar->Name = L"lblTituloAgregar";
 			this->lblTituloAgregar->Size = System::Drawing::Size(142, 22);
 			this->lblTituloAgregar->TabIndex = 0;
-			this->lblTituloAgregar->Text = L"Gesti髇 usuario";
+			this->lblTituloAgregar->Text = L"Gesti贸n usuario";
 			// 
 			// lblUsuario
 			// 
@@ -205,7 +209,7 @@ namespace ProyectoPOO {
 			this->lblNumeroID->Name = L"lblNumeroID";
 			this->lblNumeroID->Size = System::Drawing::Size(58, 13);
 			this->lblNumeroID->TabIndex = 3;
-			this->lblNumeroID->Text = L"N鷐ero ID";
+			this->lblNumeroID->Text = L"N煤mero ID";
 			// 
 			// txtNumeroID
 			// 
@@ -221,7 +225,7 @@ namespace ProyectoPOO {
 			this->lblPais->Name = L"lblPais";
 			this->lblPais->Size = System::Drawing::Size(29, 13);
 			this->lblPais->TabIndex = 5;
-			this->lblPais->Text = L"Pa韘";
+			this->lblPais->Text = L"Pa铆s";
 			// 
 			// txtPais
 			// 
@@ -237,7 +241,7 @@ namespace ProyectoPOO {
 			this->lblContrasena->Name = L"lblContrasena";
 			this->lblContrasena->Size = System::Drawing::Size(61, 13);
 			this->lblContrasena->TabIndex = 7;
-			this->lblContrasena->Text = L"Contrase馻";
+			this->lblContrasena->Text = L"Contrase帽a";
 			// 
 			// txtContrasena
 			// 
@@ -431,7 +435,7 @@ namespace ProyectoPOO {
 			this->lblBuscarCedula->Name = L"lblBuscarCedula";
 			this->lblBuscarCedula->Size = System::Drawing::Size(94, 13);
 			this->lblBuscarCedula->TabIndex = 1;
-			this->lblBuscarCedula->Text = L"Buscar por C閐ula";
+			this->lblBuscarCedula->Text = L"Buscar por C茅dula";
 			// 
 			// txtBuscarCedula
 			// 
@@ -544,7 +548,7 @@ namespace ProyectoPOO {
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"BloquearForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Gesti髇 de Usuarios";
+			this->Text = L"Gesti贸n de Usuarios";
 			this->Load += gcnew System::EventHandler(this, &BloquearForm::BloquearForm_Load);
 			this->tabControl1->ResumeLayout(false);
 			this->tabAgregar->ResumeLayout(false);
@@ -574,15 +578,22 @@ namespace ProyectoPOO {
 				return;
 			}
 
-			dgvUsuarios->Rows->Add(
-				txtUsuario->Text,
-				txtNumeroID->Text,
-				txtPais->Text,
-				txtContrasena->Text,
-				"Activo"
-			);
+			ProyectoPOO::Modelos::UsuarioGestion^ usuario = gcnew ProyectoPOO::Modelos::UsuarioGestion();
+			usuario->Nombre = txtUsuario->Text->Trim();
+			usuario->NumeroId = txtNumeroID->Text->Trim();
+			usuario->Pais = txtPais->Text->Trim();
+			usuario->Contrasena = txtContrasena->Text;
+			try {
+				controlador->Agregar(usuario);
+			}
+			catch (Exception^ ex) {
+				MessageBox::Show(ex->Message, "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				return;
+			}
 
-			MessageBox::Show("Usuario guardado correctamente.", "Informaci髇", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			dgvUsuarios->Rows->Add(usuario->Nombre, usuario->NumeroId, usuario->Pais, usuario->Contrasena, usuario->Estado);
+
+			MessageBox::Show("Usuario guardado correctamente.", "Informaci贸n", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
 			txtUsuario->Clear();
 			txtNumeroID->Clear();
@@ -600,36 +611,40 @@ namespace ProyectoPOO {
 				return;
 			}
 
-			bool encontrado = false;
-
-			for each (DataGridViewRow ^ fila in dgvUsuarios->Rows)
+			ProyectoPOO::Modelos::UsuarioGestion^ encontrado = controlador->Buscar(usuarioBuscado);
+			if (encontrado == nullptr)
 			{
-				if (fila->Cells[0]->Value != nullptr &&
-					fila->Cells[0]->Value->ToString()->ToLower() == usuarioBuscado->ToLower())
-				{
-					fila->Selected = true;
-					encontrado = true;
+				MessageBox::Show("Usuario no encontrado.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				return;
+			}
 
-					MessageBox::Show("Usuario encontrado.", "Informaci髇", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			for each (DataGridViewRow ^ fila in dgvUsuarios->Rows) {
+				if (fila->Cells[0]->Value != nullptr &&
+					String::Equals(fila->Cells[0]->Value->ToString(), encontrado->Nombre, StringComparison::OrdinalIgnoreCase)) {
+					fila->Selected = true;
 					break;
 				}
 			}
-
-			if (!encontrado)
-			{
-				MessageBox::Show("Usuario no encontrado.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-			}
+			MessageBox::Show("Usuario encontrado.", "Informaci贸n", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		}
 
 		System::Void btnEliminarUsuario_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			if (chkBloquearUsuario->Checked == false)
 			{
-				MessageBox::Show("Debe marcar la opci髇 Bloquear usuario.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				MessageBox::Show("Debe marcar la opci贸n Bloquear usuario.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 				return;
 			}
 
-			MessageBox::Show("Usuario bloqueado correctamente.", "Informaci髇", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			if (dgvUsuarios->SelectedRows->Count == 0) {
+				MessageBox::Show("Seleccione primero un usuario en la pesta帽a Buscar.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				return;
+			}
+
+			String^ nombre = dgvUsuarios->SelectedRows[0]->Cells[0]->Value->ToString();
+			controlador->Bloquear(nombre);
+			dgvUsuarios->SelectedRows[0]->Cells[4]->Value = L"Bloqueado";
+			MessageBox::Show("Usuario bloqueado correctamente.", "Informaci贸n", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		}
 
 		System::Void btnSalir_Click(System::Object^ sender, System::EventArgs^ e)
@@ -639,6 +654,11 @@ namespace ProyectoPOO {
 	private: System::Void tabBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void BloquearForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	controlador->Recargar();
+	dgvUsuarios->Rows->Clear();
+	for each (ProyectoPOO::Modelos::UsuarioGestion^ usuario in controlador->ObtenerTodos()) {
+		dgvUsuarios->Rows->Add(usuario->Nombre, usuario->NumeroId, usuario->Pais, usuario->Contrasena, usuario->Estado);
+	}
 }
 };
 }

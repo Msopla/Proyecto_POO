@@ -2,6 +2,7 @@
 
 #include "MenuForm.h"
 #include "UsuariosForm.h"
+#include "../Controladores/AutenticacionController.h"
 
 namespace ProyectoPOO {
 
@@ -19,8 +20,7 @@ namespace ProyectoPOO {
 		LoginForm(void)
 		{
 			InitializeComponent();
-			this->usuarios = gcnew System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>();
-			this->archivoUsuarios = L"usuarios.dat";
+			this->controlador = gcnew ProyectoPOO::Controladores::AutenticacionController();
 		}
 
 	protected:
@@ -41,8 +41,7 @@ namespace ProyectoPOO {
 	private: System::Windows::Forms::Button^ buttonLogin;
 	private: System::Windows::Forms::Button^ buttonRegistrar;
 	private: System::Windows::Forms::Label^ labelMensaje;
-	private: System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>^ usuarios;
-	private: System::String^ archivoUsuarios;
+	private: ProyectoPOO::Controladores::AutenticacionController^ controlador;
 
 	private:
 
@@ -200,17 +199,8 @@ namespace ProyectoPOO {
 			return;
 		}
 
-		// Buscar usuario en la lista
-		bool usuarioEncontrado = false;
-		for each (auto user in this->usuarios) {
-			if (user[L"usuario"] == usuario && user[L"contrasena"] == contrasena) {
-				usuarioEncontrado = true;
-				break;
-			}
-		}
-
-		// Solo el admin puede abrir el menu del hospital
-		if (usuario == L"admin" && contrasena == L"12345") {
+		ProyectoPOO::Modelos::Usuario^ usuarioAutenticado = controlador->Autenticar(usuario, contrasena);
+		if (usuarioAutenticado != nullptr && usuarioAutenticado->Rol == L"Administrador") {
 			this->labelMensaje->ForeColor = System::Drawing::Color::Green;
 			this->labelMensaje->Text = L"Inicio de sesion exitoso!";
 
@@ -219,7 +209,7 @@ namespace ProyectoPOO {
 
 			this->Close();
 		}
-		else if (usuarioEncontrado) {
+		else if (usuarioAutenticado != nullptr) {
 			this->labelMensaje->ForeColor = System::Drawing::Color::Green;
 			this->labelMensaje->Text = L"Inicio de sesion exitoso!";
 
@@ -239,36 +229,12 @@ namespace ProyectoPOO {
 	private: System::Void buttonRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ usuario = this->textBoxUsuario->Text->Trim();
 		String^ contrasena = this->textBoxContrasena->Text->Trim();
-
-		// Validar campos vacios
-		if (usuario->Length == 0 || contrasena->Length == 0) {
+		String^ error = controlador->Registrar(usuario, contrasena);
+		if (error != nullptr) {
 			this->labelMensaje->ForeColor = System::Drawing::Color::Red;
-			this->labelMensaje->Text = L"Completa usuario y contrasena";
+			this->labelMensaje->Text = error;
 			return;
 		}
-
-		// Validar longitud minima de contrasena
-		if (contrasena->Length < 4) {
-			this->labelMensaje->ForeColor = System::Drawing::Color::Red;
-			this->labelMensaje->Text = L"Contrasena debe tener minimo 4 caracteres";
-			return;
-		}
-
-		// Verificar si el usuario ya existe
-		for each (auto user in this->usuarios) {
-			if (user[L"usuario"] == usuario) {
-				this->labelMensaje->ForeColor = System::Drawing::Color::Red;
-				this->labelMensaje->Text = L"El usuario ya existe";
-				return;
-			}
-		}
-
-		// Crear nuevo usuario
-		auto nuevoUsuario = gcnew System::Collections::Generic::Dictionary<System::String^, System::String^>();
-		nuevoUsuario[L"usuario"] = usuario;
-		nuevoUsuario[L"contrasena"] = contrasena;
-		this->usuarios->Add(nuevoUsuario);
-		GuardarUsuarios();
 
 		// Enviar los usuarios registrados a la busqueda de pacientes
 		this->labelMensaje->ForeColor = System::Drawing::Color::Green;
@@ -279,51 +245,7 @@ namespace ProyectoPOO {
 
 		this->Close();
 	}
-	private: System::Void GuardarUsuarios() {
-		try {
-			System::IO::StreamWriter^ writer = gcnew System::IO::StreamWriter(this->archivoUsuarios, false, System::Text::Encoding::UTF8);
-			for each (auto user in this->usuarios) {
-				writer->WriteLine(user[L"usuario"] + L"|" + user[L"contrasena"]);
-			}
-			writer->Close();
-			delete writer;
-		}
-		catch (System::Exception^) {
-		}
-	}
-
-	private: System::Void CargarUsuarios() {
-		this->usuarios->Clear();
-
-		try {
-			if (System::IO::File::Exists(this->archivoUsuarios)) {
-				System::IO::StreamReader^ reader = gcnew System::IO::StreamReader(this->archivoUsuarios, System::Text::Encoding::UTF8);
-				System::String^ linea;
-
-				while ((linea = reader->ReadLine()) != nullptr) {
-					if (linea->Length == 0) {
-						continue;
-					}
-
-					array<System::String^>^ datos = linea->Split('|');
-					if (datos->Length == 2) {
-						auto usuarioGuardado = gcnew System::Collections::Generic::Dictionary<System::String^, System::String^>();
-						usuarioGuardado[L"usuario"] = datos[0];
-						usuarioGuardado[L"contrasena"] = datos[1];
-						this->usuarios->Add(usuarioGuardado);
-					}
-				}
-
-				reader->Close();
-				delete reader;
-			}
-		}
-		catch (System::Exception^) {
-		}
-	}
-
 	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e) {
-		CargarUsuarios();
 	}
 };
 }

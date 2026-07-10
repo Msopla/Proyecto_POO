@@ -13,54 +13,124 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Modelo">
+      <UniqueIdentifier>{B1B11B11-B111-4111-8111-B111B111B111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vista">
+      <UniqueIdentifier>{B2B22B22-B222-4222-8222-B222B222B222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controlador">
+      <UniqueIdentifier>{B3B33B33-B333-4333-8333-B333B333B333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Datos">
+      <UniqueIdentifier>{B4B44B44-B444-4444-8444-B444B444B444}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="mainForm.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Vistas\mainForm.cpp">
+      <Filter>Vista</Filter>
     </ClCompile>
-    <ClCompile Include="MenuForm.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Vistas\MenuForm.cpp">
+      <Filter>Vista</Filter>
     </ClCompile>
-    <ClCompile Include="pacienteForm.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Vistas\pacienteForm.cpp">
+      <Filter>Vista</Filter>
     </ClCompile>
-    <ClCompile Include="PersonalForm.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Vistas\PersonalForm.cpp">
+      <Filter>Vista</Filter>
     </ClCompile>
-    <ClCompile Include="seguridadForm.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Vistas\seguridadForm.cpp">
+      <Filter>Vista</Filter>
     </ClCompile>
-    <ClCompile Include="UsuariosForm.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Vistas\UsuariosForm.cpp">
+      <Filter>Vista</Filter>
     </ClCompile>
-    <ClCompile Include="BloquearForm.cpp">
-      <Filter>Archivos de encabezado</Filter>
+    <ClCompile Include="Vistas\BloquearForm.cpp">
+      <Filter>Vista</Filter>
+    </ClCompile>
+    <ClCompile Include="Vistas\registroMForm.cpp">
+      <Filter>Vista</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mainForm.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Vistas\mainForm.h">
+      <Filter>Vista</Filter>
     </ClInclude>
-    <ClInclude Include="MenuForm.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Vistas\MenuForm.h">
+      <Filter>Vista</Filter>
     </ClInclude>
-    <ClInclude Include="PersonalForm.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Vistas\PersonalForm.h">
+      <Filter>Vista</Filter>
     </ClInclude>
-    <ClInclude Include="seguridadForm.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Vistas\seguridadForm.h">
+      <Filter>Vista</Filter>
     </ClInclude>
-    <ClInclude Include="LoginForm.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Vistas\LoginForm.h">
+      <Filter>Vista</Filter>
     </ClInclude>
-    <ClInclude Include="pacienteForm.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Vistas\pacienteForm.h">
+      <Filter>Vista</Filter>
     </ClInclude>
-    <ClInclude Include="UsuariosForm.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Vistas\UsuariosForm.h">
+      <Filter>Vista</Filter>
     </ClInclude>
-    <ClInclude Include="BloquearForm.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Vistas\BloquearForm.h">
+      <Filter>Vista</Filter>
     </ClInclude>
+    <ClInclude Include="Vistas\registroMForm.h">
+      <Filter>Vista</Filter>
+    </ClInclude>
+    <ClInclude Include="Modelos\EmpleadoSeguridad.h">
+      <Filter>Modelo</Filter>
+    </ClInclude>
+    <ClInclude Include="Modelos\Paciente.h">
+      <Filter>Modelo</Filter>
+    </ClInclude>
+    <ClInclude Include="Modelos\PersonalHospital.h">
+      <Filter>Modelo</Filter>
+    </ClInclude>
+    <ClInclude Include="Modelos\Medicamento.h">
+      <Filter>Modelo</Filter>
+    </ClInclude>
+    <ClInclude Include="Modelos\Usuario.h">
+      <Filter>Modelo</Filter>
+    </ClInclude>
+    <ClInclude Include="Modelos\UsuarioGestion.h">
+      <Filter>Modelo</Filter>
+    </ClInclude>
+    <ClInclude Include="Controladores\AutenticacionController.h">
+      <Filter>Controlador</Filter>
+    </ClInclude>
+    <ClInclude Include="Controladores\GestionUsuariosController.h">
+      <Filter>Controlador</Filter>
+    </ClInclude>
+    <ClInclude Include="Controladores\PacienteController.h">
+      <Filter>Controlador</Filter>
+    </ClInclude>
+    <ClInclude Include="Controladores\PersonalController.h">
+      <Filter>Controlador</Filter>
+    </ClInclude>
+    <ClInclude Include="Controladores\MedicamentoController.h">
+      <Filter>Controlador</Filter>
+    </ClInclude>
+    <ClInclude Include="Controladores\RutasDatos.h">
+      <Filter>Controlador</Filter>
+    </ClInclude>
+    <ClInclude Include="Controladores\SeguridadController.h">
+      <Filter>Controlador</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Datos\empleados_seguridad.txt">
+      <Filter>Datos</Filter>
+    </Content>
+    <Content Include="Datos\pacientes.dat">
+      <Filter>Datos</Filter>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Vistas\registroMForm.resx">
+      <Filter>Archivos de recursos</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

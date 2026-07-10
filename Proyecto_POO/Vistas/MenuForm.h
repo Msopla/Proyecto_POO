@@ -3,6 +3,7 @@
 #include "pacienteForm.h"
 #include "seguridadForm.h"
 #include "PersonalForm.h"
+#include "registroMForm.h"
 namespace ProyectoPOO {
 
 	using namespace System;
@@ -22,13 +23,13 @@ namespace ProyectoPOO {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cÃ³digo de constructor aquÃ­
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estÃ©n usando.
 		/// </summary>
 		~MenuForm()
 		{
@@ -45,6 +46,7 @@ namespace ProyectoPOO {
 	private: System::Windows::Forms::Button^ seguridad;
 	private: System::Windows::Forms::Button^ Personal;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btnMedicamentos;
 
 
 
@@ -52,18 +54,17 @@ namespace ProyectoPOO {
 
 	private:
 		/// <summary>
-		/// Variable del diseñador necesaria.
+		/// Variable del diseÃ±ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// MÃ©todo necesario para admitir el DiseÃ±ador. No se puede modificar
+		/// el contenido de este mÃ©todo con el editor de cÃ³digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MenuForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
@@ -72,21 +73,11 @@ namespace ProyectoPOO {
 			this->seguridad = (gcnew System::Windows::Forms::Button());
 			this->Personal = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnMedicamentos = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			this->SuspendLayout();
-			//
-			// Button1
-			// 
-			this->button1->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->button1->Location = System::Drawing::Point(35, 391);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(101, 32);
-			this->button1->TabIndex = 7;
-			this->button1->Text = L"regresar";
-			this->button1->UseVisualStyleBackColor = false;	
-			this->button1->Click += gcnew System::EventHandler(this, &MenuForm::button1_Click);
 			// 
 			// label1
 			// 
@@ -102,7 +93,6 @@ namespace ProyectoPOO {
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->Location = System::Drawing::Point(35, 177);
 			this->pictureBox1->Margin = System::Windows::Forms::Padding(2);
 			this->pictureBox1->Name = L"pictureBox1";
@@ -114,9 +104,8 @@ namespace ProyectoPOO {
 			// 
 			// pictureBox2
 			// 
-			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
 			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox2->Location = System::Drawing::Point(219, 177);
+			this->pictureBox2->Location = System::Drawing::Point(189, 177);
 			this->pictureBox2->Margin = System::Windows::Forms::Padding(2);
 			this->pictureBox2->Name = L"pictureBox2";
 			this->pictureBox2->Size = System::Drawing::Size(130, 110);
@@ -125,9 +114,8 @@ namespace ProyectoPOO {
 			// 
 			// pictureBox3
 			// 
-			this->pictureBox3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.BackgroundImage")));
 			this->pictureBox3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox3->Location = System::Drawing::Point(398, 177);
+			this->pictureBox3->Location = System::Drawing::Point(358, 177);
 			this->pictureBox3->Margin = System::Windows::Forms::Padding(2);
 			this->pictureBox3->Name = L"pictureBox3";
 			this->pictureBox3->Size = System::Drawing::Size(124, 110);
@@ -152,7 +140,7 @@ namespace ProyectoPOO {
 			// 
 			this->seguridad->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->seguridad->Location = System::Drawing::Point(219, 318);
+			this->seguridad->Location = System::Drawing::Point(189, 319);
 			this->seguridad->Margin = System::Windows::Forms::Padding(2);
 			this->seguridad->Name = L"seguridad";
 			this->seguridad->Size = System::Drawing::Size(130, 43);
@@ -165,7 +153,7 @@ namespace ProyectoPOO {
 			// 
 			this->Personal->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Personal->Location = System::Drawing::Point(398, 318);
+			this->Personal->Location = System::Drawing::Point(358, 319);
 			this->Personal->Margin = System::Windows::Forms::Padding(2);
 			this->Personal->Name = L"Personal";
 			this->Personal->Size = System::Drawing::Size(124, 43);
@@ -185,13 +173,26 @@ namespace ProyectoPOO {
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &MenuForm::button1_Click);
 			// 
+			// btnMedicamentos
+			// 
+			this->btnMedicamentos->BackColor = System::Drawing::SystemColors::ButtonShadow;
+			this->btnMedicamentos->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnMedicamentos->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F));
+			this->btnMedicamentos->Location = System::Drawing::Point(520, 319);
+			this->btnMedicamentos->Name = L"btnMedicamentos";
+			this->btnMedicamentos->Size = System::Drawing::Size(124, 43);
+			this->btnMedicamentos->TabIndex = 7;
+			this->btnMedicamentos->Text = L"Medicamentos";
+			this->btnMedicamentos->UseVisualStyleBackColor = false;
+			this->btnMedicamentos->Click += gcnew System::EventHandler(this, &MenuForm::btnMedicamentos_Click);
+			// 
 			// MenuForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(7, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->BackColor = System::Drawing::SystemColors::ButtonShadow;
-			this->ClientSize = System::Drawing::Size(600, 435);
+			this->ClientSize = System::Drawing::Size(689, 456);
+			this->Controls->Add(this->btnMedicamentos);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->Personal);
 			this->Controls->Add(this->seguridad);
@@ -200,6 +201,8 @@ namespace ProyectoPOO {
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->label1);
+			this->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MenuForm";
 			this->Text = L"MenuForm";
@@ -228,6 +231,10 @@ namespace ProyectoPOO {
 		personal->ShowDialog();
 	}
 	private: System::Void MenuForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void btnMedicamentos_Click(System::Object^ sender, System::EventArgs^ e) {
+		registroMForm^ formulario = gcnew registroMForm();
+		formulario->ShowDialog(this);
 	}
 };
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Controladores/PersonalController.h"
+
 namespace ProyectoPOO {
 
 	using namespace System;
@@ -21,6 +23,7 @@ namespace ProyectoPOO {
 		PersonalForm(void)
 		{
 			InitializeComponent();
+			controlador = gcnew ProyectoPOO::Controladores::PersonalController();
 		}
 
 	protected:
@@ -33,6 +36,7 @@ namespace ProyectoPOO {
 		}
 
 	private: System::Windows::Forms::Label^ label1;
+	private: ProyectoPOO::Controladores::PersonalController^ controlador;
 
 	private: System::Windows::Forms::TabControl^ tabControl1;
 	private: System::Windows::Forms::TabPage^ tabAgregar;
@@ -202,7 +206,7 @@ namespace ProyectoPOO {
 			this->lblCedula->Name = L"lblCedula";
 			this->lblCedula->Size = System::Drawing::Size(100, 25);
 			this->lblCedula->TabIndex = 2;
-			this->lblCedula->Text = L"Cédula:";
+			this->lblCedula->Text = L"CÃ©dula:";
 			// 
 			// txtCedula
 			// 
@@ -217,7 +221,7 @@ namespace ProyectoPOO {
 			this->lblTelefono->Name = L"lblTelefono";
 			this->lblTelefono->Size = System::Drawing::Size(100, 25);
 			this->lblTelefono->TabIndex = 4;
-			this->lblTelefono->Text = L"Teléfono:";
+			this->lblTelefono->Text = L"TelÃ©fono:";
 			// 
 			// txtTelefono
 			// 
@@ -252,7 +256,7 @@ namespace ProyectoPOO {
 			// cmbTurno
 			// 
 			this->cmbTurno->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->cmbTurno->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Mañana", L"Tarde", L"Noche" });
+			this->cmbTurno->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"MaÃ±ana", L"Tarde", L"Noche" });
 			this->cmbTurno->Location = System::Drawing::Point(520, 25);
 			this->cmbTurno->Name = L"cmbTurno";
 			this->cmbTurno->Size = System::Drawing::Size(160, 21);
@@ -330,7 +334,7 @@ namespace ProyectoPOO {
 			this->tabInformacion->Name = L"tabInformacion";
 			this->tabInformacion->Size = System::Drawing::Size(717, 259);
 			this->tabInformacion->TabIndex = 1;
-			this->tabInformacion->Text = L"Información personal";
+			this->tabInformacion->Text = L"InformaciÃ³n personal";
 			this->tabInformacion->UseVisualStyleBackColor = true;
 			// 
 			// dgvInformacion
@@ -356,13 +360,13 @@ namespace ProyectoPOO {
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
-			this->dataGridViewTextBoxColumn2->HeaderText = L"Cédula";
+			this->dataGridViewTextBoxColumn2->HeaderText = L"CÃ©dula";
 			this->dataGridViewTextBoxColumn2->Name = L"dataGridViewTextBoxColumn2";
 			this->dataGridViewTextBoxColumn2->ReadOnly = true;
 			// 
 			// dataGridViewTextBoxColumn3
 			// 
-			this->dataGridViewTextBoxColumn3->HeaderText = L"Teléfono";
+			this->dataGridViewTextBoxColumn3->HeaderText = L"TelÃ©fono";
 			this->dataGridViewTextBoxColumn3->Name = L"dataGridViewTextBoxColumn3";
 			this->dataGridViewTextBoxColumn3->ReadOnly = true;
 			// 
@@ -403,7 +407,7 @@ namespace ProyectoPOO {
 			this->tabAsignacion->Name = L"tabAsignacion";
 			this->tabAsignacion->Size = System::Drawing::Size(717, 259);
 			this->tabAsignacion->TabIndex = 2;
-			this->tabAsignacion->Text = L"Asignación";
+			this->tabAsignacion->Text = L"AsignaciÃ³n";
 			this->tabAsignacion->UseVisualStyleBackColor = true;
 			// 
 			// dgvAsignacion
@@ -488,92 +492,6 @@ namespace ProyectoPOO {
 	
 #pragma endregion
 
-	private: array<Byte>^ ObtenerClaveValida() {
-		String^ claveOriginal = "ProyectoPOO2024";
-		array<Byte>^ claveBytes = Encoding::UTF8->GetBytes(claveOriginal);
-		array<Byte>^ claveValida = gcnew cli::array<Byte>(16);
-
-		// Rellenar la clave a 16 bytes si es necesario
-		for (int i = 0; i < 16; i++) {
-			claveValida[i] = claveBytes[i % claveBytes->Length];
-		}
-
-		return claveValida;
-	}
-
-	private: String^ EncriptarDatos(String^ datosPlanos) {
-		try {
-			array<Byte>^ keyBytes = ObtenerClaveValida();
-			array<Byte>^ dataBytes = Encoding::UTF8->GetBytes(datosPlanos);
-
-			RijndaelManaged^ rijndael = gcnew RijndaelManaged();
-			rijndael->Key = keyBytes;
-			rijndael->Mode = CipherMode::CBC;
-			rijndael->Padding = PaddingMode::PKCS7;
-
-			ICryptoTransform^ encryptor = rijndael->CreateEncryptor(rijndael->Key, rijndael->IV);
-			MemoryStream^ ms = gcnew MemoryStream();
-
-			array<Byte>^ iv = rijndael->IV;
-			ms->Write(iv, 0, iv->Length);
-
-			CryptoStream^ cs = gcnew CryptoStream(ms, encryptor, CryptoStreamMode::Write);
-			cs->Write(dataBytes, 0, dataBytes->Length);
-			cs->FlushFinalBlock();
-
-			array<Byte>^ encryptedBytes = ms->ToArray();
-			String^ resultado = Convert::ToBase64String(encryptedBytes);
-
-			delete cs;
-			delete ms;
-			delete encryptor;
-			delete rijndael;
-
-			return resultado;
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error en encriptación: " + ex->Message, "Error",
-				MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return "";
-		}
-	}
-
-	private: String^ DesencriptarDatos(String^ datosEncriptados) {
-		try {
-			array<Byte>^ keyBytes = ObtenerClaveValida();
-			array<Byte>^ encryptedBytes = Convert::FromBase64String(datosEncriptados);
-
-			RijndaelManaged^ rijndael = gcnew RijndaelManaged();
-			rijndael->Key = keyBytes;
-			rijndael->Mode = CipherMode::CBC;
-			rijndael->Padding = PaddingMode::PKCS7;
-
-			array<Byte>^ iv = gcnew cli::array<Byte>(16);
-			Array::Copy(encryptedBytes, 0, iv, 0, 16);
-			rijndael->IV = iv;
-
-			MemoryStream^ ms = gcnew MemoryStream(encryptedBytes, 16, encryptedBytes->Length - 16);
-			ICryptoTransform^ decryptor = rijndael->CreateDecryptor(rijndael->Key, rijndael->IV);
-			CryptoStream^ cs = gcnew CryptoStream(ms, decryptor, CryptoStreamMode::Read);
-
-			StreamReader^ sr = gcnew StreamReader(cs, Encoding::UTF8);
-			String^ resultado = sr->ReadToEnd();
-
-			delete sr;
-			delete cs;
-			delete ms;
-			delete decryptor;
-			delete rijndael;
-
-			return resultado;
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error en desencriptación: " + ex->Message, "Error",
-				MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return "";
-		}
-	}
-
 	private: System::Void PersonalForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		CargarPersonal();
 	}
@@ -589,83 +507,55 @@ namespace ProyectoPOO {
 		}
 		else {
 			try {
+				ProyectoPOO::Modelos::PersonalHospital^ persona = gcnew ProyectoPOO::Modelos::PersonalHospital();
+				persona->Nombre = txtNombre->Text->Trim();
+				persona->Cedula = txtCedula->Text->Trim();
+				persona->Telefono = txtTelefono->Text->Trim();
+				persona->Cargo = txtCargo->Text->Trim();
+				persona->Turno = cmbTurno->Text;
+				persona->Zona = cmbZona->Text;
+				persona->PacienteAsignado = txtPaciente->Text->Trim();
+				persona->IdPaciente = txtIdPaciente->Text->Trim();
+				controlador->Agregar(persona);
+
 				dgvInformacion->Rows->Add(
-					txtNombre->Text,
-					txtCedula->Text,
-					txtTelefono->Text,
-					txtCargo->Text,
-					cmbTurno->Text,
-					cmbZona->Text,
-					txtPaciente->Text,
-					txtIdPaciente->Text
+					persona->Nombre,
+					persona->Cedula,
+					persona->Telefono,
+					persona->Cargo,
+					persona->Turno,
+					persona->Zona,
+					persona->PacienteAsignado,
+					persona->IdPaciente
 				);
 
 				dgvAsignacion->Rows->Add(
-					txtNombre->Text,
-					txtCargo->Text,
-					cmbZona->Text,
-					txtPaciente->Text,
-					txtIdPaciente->Text
+					persona->Nombre,
+					persona->Cargo,
+					persona->Zona,
+					persona->PacienteAsignado,
+					persona->IdPaciente
 				);
 
-				String^ datosPlanos = 
-					txtNombre->Text + ";" +
-					txtCedula->Text + ";" +
-					txtTelefono->Text + ";" +
-					txtCargo->Text + ";" +
-					cmbTurno->Text + ";" +
-					cmbZona->Text + ";" +
-					txtPaciente->Text + ";" +
-					txtIdPaciente->Text;
-
-				String^ datosEncriptados = EncriptarDatos(datosPlanos);
-
-				if (datosEncriptados != "") {
-					String^ rutaArchivo = Path::Combine(
-						Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData),
-						"ProyectoPOO", "personal_hospital.txt"
-					);
-
-					Directory::CreateDirectory(Path::GetDirectoryName(rutaArchivo));
-
-					StreamWriter^ archivo = gcnew StreamWriter(rutaArchivo, true, Encoding::UTF8);
-					try {
-						archivo->WriteLine(datosEncriptados);
-						MessageBox::Show("Personal guardado correctamente.", "Registro exitoso",
-							MessageBoxButtons::OK, MessageBoxIcon::Information);
-						LimpiarCampos();
-					}
-					finally {
-						if (archivo != nullptr) {
-							archivo->Close();
-							delete archivo;
-						}
-					}
-				}
+				MessageBox::Show("Personal guardado correctamente.", "Registro exitoso",
+					MessageBoxButtons::OK, MessageBoxIcon::Information);
+				LimpiarCampos();
 			}
 			catch (UnauthorizedAccessException^ ex) {
 				MessageBox::Show("Acceso denegado al guardar el archivo: " + ex->Message, "Error de permisos",
 					MessageBoxButtons::OK, MessageBoxIcon::Error);
-				dgvInformacion->Rows->RemoveAt(dgvInformacion->Rows->Count - 1);
-				dgvAsignacion->Rows->RemoveAt(dgvAsignacion->Rows->Count - 1);
 			}
 			catch (DirectoryNotFoundException^ ex) {
-				MessageBox::Show("No se encontró la ruta del archivo: " + ex->Message, "Error de ruta",
+				MessageBox::Show("No se encontrÃ³ la ruta del archivo: " + ex->Message, "Error de ruta",
 					MessageBoxButtons::OK, MessageBoxIcon::Error);
-				dgvInformacion->Rows->RemoveAt(dgvInformacion->Rows->Count - 1);
-				dgvAsignacion->Rows->RemoveAt(dgvAsignacion->Rows->Count - 1);
 			}
 			catch (IOException^ ex) {
 				MessageBox::Show("Error de entrada/salida al guardar: " + ex->Message, "Error de E/S",
 					MessageBoxButtons::OK, MessageBoxIcon::Error);
-				dgvInformacion->Rows->RemoveAt(dgvInformacion->Rows->Count - 1);
-				dgvAsignacion->Rows->RemoveAt(dgvAsignacion->Rows->Count - 1);
 			}
 			catch (Exception^ ex) {
 				MessageBox::Show("Error inesperado: " + ex->Message, "Error",
 					MessageBoxButtons::OK, MessageBoxIcon::Error);
-				dgvInformacion->Rows->RemoveAt(dgvInformacion->Rows->Count - 1);
-				dgvAsignacion->Rows->RemoveAt(dgvAsignacion->Rows->Count - 1);
 			}
 		}
 	}
@@ -691,72 +581,19 @@ namespace ProyectoPOO {
 
 	private: System::Void CargarPersonal() {
 		try {
-			String^ rutaArchivo = Path::Combine(
-				Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData),
-				"ProyectoPOO", "personal_hospital.txt"
-			);
-
-			if (File::Exists(rutaArchivo)) {
-				try {
-					array<String^>^ lineas = File::ReadAllLines(rutaArchivo, Encoding::UTF8);
-
-					for each (String ^ linea in lineas) {
-						if (String::IsNullOrWhiteSpace(linea)) {
-							continue;
-						}
-
-						String^ datosDesencriptados = DesencriptarDatos(linea);
-
-						if (datosDesencriptados != "") {
-							array<String^>^ datos = datosDesencriptados->Split(';');
-
-							if (datos->Length == 8) {
-								dgvInformacion->Rows->Add(
-									datos[0],
-									datos[1],
-									datos[2],
-									datos[3],
-									datos[4],
-									datos[5],
-									datos[6],
-									datos[7]
-								);
-
-								dgvAsignacion->Rows->Add(
-									datos[0],
-									datos[3],
-									datos[5],
-									datos[6],
-									datos[7]
-								);
-							}
-						}
-					}
-				}
-				catch (DecoderFallbackException^ ex) {
-					MessageBox::Show("El archivo está corrupto o tiene codificación inválida: " + ex->Message, 
-						"Error de codificación", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				}
+			dgvInformacion->Rows->Clear();
+			dgvAsignacion->Rows->Clear();
+			for each (ProyectoPOO::Modelos::PersonalHospital^ persona in controlador->ObtenerTodos()) {
+				dgvInformacion->Rows->Add(
+					persona->Nombre, persona->Cedula, persona->Telefono, persona->Cargo,
+					persona->Turno, persona->Zona, persona->PacienteAsignado, persona->IdPaciente);
+				dgvAsignacion->Rows->Add(
+					persona->Nombre, persona->Cargo, persona->Zona,
+					persona->PacienteAsignado, persona->IdPaciente);
 			}
 		}
-		catch (UnauthorizedAccessException^ ex) {
-			MessageBox::Show("No tiene permisos para acceder al archivo: " + ex->Message, 
-				"Error de permisos", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-		catch (FileNotFoundException^ ex) {
-			MessageBox::Show("El archivo de personal no fue encontrado: " + ex->Message, 
-				"Archivo no encontrado", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-		}
-		catch (DirectoryNotFoundException^ ex) {
-			MessageBox::Show("El directorio no existe: " + ex->Message, 
-				"Directorio no encontrado", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-		catch (IOException^ ex) {
-			MessageBox::Show("Error de entrada/salida al leer el archivo: " + ex->Message, 
-				"Error de E/S", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
 		catch (Exception^ ex) {
-			MessageBox::Show("Error inesperado al cargar personal: " + ex->Message, 
+			MessageBox::Show("No se pudo cargar el personal: " + ex->Message,
 				"Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}

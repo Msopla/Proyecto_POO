@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Controladores/PacienteController.h"
+
 namespace ProyectoPOO {
 
     using namespace System;
@@ -15,7 +17,7 @@ namespace ProyectoPOO {
         UsuariosForm(void)
         {
             InitializeComponent();
-            archivoGuardado = L"pacientes.dat";
+            controlador = gcnew ProyectoPOO::Controladores::PacienteController();
         }
 
     protected:
@@ -36,11 +38,10 @@ namespace ProyectoPOO {
     private: System::Windows::Forms::Panel^ panelResultado;
     private: System::Windows::Forms::Label^ labelResultadoTitulo;
     private: System::Windows::Forms::Label^ labelResultadoDatos;
-    private: System::String^ archivoGuardado;
+    private: ProyectoPOO::Controladores::PacienteController^ controlador;
 
     private:
         System::ComponentModel::Container^ components;
-        System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>^ pacientes;
 
 #pragma region Windows Form Designer generated code
         void InitializeComponent(void)
@@ -185,8 +186,7 @@ namespace ProyectoPOO {
 #pragma endregion
 
     private: System::Void UsuariosForm_Load(System::Object^ sender, System::EventArgs^ e) {
-        this->pacientes = gcnew System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>();
-        CargarPacientes();
+        controlador->Recargar();
     }
 
     private: System::Void buttonBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -214,13 +214,10 @@ namespace ProyectoPOO {
             return;
         }
 
-        CargarPacientes();
-
-        for each (auto paciente in this->pacientes) {
-            if (ObtenerValorPaciente(paciente, L"cedula") == cedula) {
-                MostrarPaciente(paciente);
-                return;
-            }
+        ProyectoPOO::Modelos::Paciente^ paciente = controlador->BuscarPorCedula(cedula);
+        if (paciente != nullptr) {
+            MostrarPaciente(paciente);
+            return;
         }
 
         this->labelMensaje->ForeColor = System::Drawing::Color::Red;
@@ -228,21 +225,21 @@ namespace ProyectoPOO {
         LimpiarResultado();
     }
 
-    private: System::Void MostrarPaciente(System::Collections::Generic::Dictionary<System::String^, System::String^>^ paciente) {
+    private: System::Void MostrarPaciente(ProyectoPOO::Modelos::Paciente^ paciente) {
         this->labelMensaje->ForeColor = System::Drawing::Color::Green;
         this->labelMensaje->Text = L"Paciente encontrado";
-        this->labelResultadoTitulo->Text = L"Paciente: " + ObtenerValorPaciente(paciente, L"nombre");
+        this->labelResultadoTitulo->Text = L"Paciente: " + paciente->Nombre;
         this->labelResultadoDatos->Text =
-            L"ID: " + ObtenerValorPaciente(paciente, L"id") +
-            L"    Cedula: " + ObtenerValorPaciente(paciente, L"cedula") +
-            L"    Estado: " + ObtenerValorPaciente(paciente, L"estado") + System::Environment::NewLine +
-            L"Correo: " + ObtenerValorPaciente(paciente, L"correo") +
-            L"    Tipo de sangre: " + ObtenerValorPaciente(paciente, L"sangre") + System::Environment::NewLine +
-            L"Motivo: " + ObtenerValorPaciente(paciente, L"motivo") + System::Environment::NewLine +
-            L"Alergias: " + ObtenerValorPaciente(paciente, L"alergias") +
-            L"    Enfermedades: " + ObtenerValorPaciente(paciente, L"enfermedades") + System::Environment::NewLine +
-            L"Seguro: " + ObtenerValorPaciente(paciente, L"seguro") +
-            L"    Medico: " + ObtenerValorPaciente(paciente, L"medico");
+            L"ID: " + paciente->Id +
+            L"    Cedula: " + paciente->Cedula +
+            L"    Estado: " + paciente->Estado + System::Environment::NewLine +
+            L"Correo: " + paciente->Correo +
+            L"    Tipo de sangre: " + paciente->TipoSangre + System::Environment::NewLine +
+            L"Motivo: " + paciente->Motivo + System::Environment::NewLine +
+            L"Alergias: " + paciente->Alergias +
+            L"    Enfermedades: " + paciente->Enfermedades + System::Environment::NewLine +
+            L"Seguro: " + paciente->SeguroMedico +
+            L"    Medico: " + paciente->MedicoTratante;
     }
 
     private: System::Void LimpiarResultado() {
@@ -250,51 +247,5 @@ namespace ProyectoPOO {
         this->labelResultadoDatos->Text = L"Ingrese una cedula y presione Buscar.";
     }
 
-    private: System::String^ ObtenerValorPaciente(System::Collections::Generic::Dictionary<System::String^, System::String^>^ paciente, System::String^ clave) {
-        if (paciente->ContainsKey(clave)) {
-            return paciente[clave];
-        }
-
-        return L"";
-    }
-
-    private: System::Void CargarPacientes() {
-        this->pacientes->Clear();
-
-        try {
-            if (System::IO::File::Exists(archivoGuardado)) {
-                System::IO::StreamReader^ reader = gcnew System::IO::StreamReader(archivoGuardado, System::Text::Encoding::UTF8);
-                System::String^ linea = reader->ReadLine();
-
-                while ((linea = reader->ReadLine()) != nullptr) {
-                    if (linea->Length > 0) {
-                        array<System::String^>^ datos = linea->Split('|');
-
-                        if (datos->Length == 11) {
-                            auto paciente = gcnew System::Collections::Generic::Dictionary<System::String^, System::String^>();
-                            paciente[L"id"] = datos[0];
-                            paciente[L"cedula"] = datos[1];
-                            paciente[L"nombre"] = datos[2];
-                            paciente[L"correo"] = datos[3];
-                            paciente[L"motivo"] = datos[4];
-                            paciente[L"sangre"] = datos[5];
-                            paciente[L"alergias"] = datos[6];
-                            paciente[L"enfermedades"] = datos[7];
-                            paciente[L"seguro"] = datos[8];
-                            paciente[L"medico"] = datos[9];
-                            paciente[L"estado"] = datos[10];
-
-                            this->pacientes->Add(paciente);
-                        }
-                    }
-                }
-
-                reader->Close();
-                delete reader;
-            }
-        }
-        catch (System::Exception^ ex) {
-        }
-    }
     };
 }

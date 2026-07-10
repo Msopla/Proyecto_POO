@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Controladores/PacienteController.h"
+
 namespace ProyectoPOO {
 
     using namespace System;
@@ -16,8 +18,7 @@ namespace ProyectoPOO {
         pacienteForm(void)
         {
             InitializeComponent();
-            idCounter = 1000;
-            archivoGuardado = L"pacientes.dat";
+            controlador = gcnew ProyectoPOO::Controladores::PacienteController();
         }
 
     protected:
@@ -57,15 +58,13 @@ namespace ProyectoPOO {
     private: System::Windows::Forms::Label^ labelTitulo;
     private: System::Windows::Forms::Label^ labelMensaje;
     private: System::Windows::Forms::Button^ buttonAtras;
-    private: int idCounter;
-    private: System::String^ archivoGuardado;
+    private: ProyectoPOO::Controladores::PacienteController^ controlador;
 
     protected:
 
     private:
 
         System::ComponentModel::Container^ components;
-        System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>^ pacientes;
 
 #pragma region Windows Form Designer generated code
 
@@ -453,32 +452,29 @@ namespace ProyectoPOO {
         }
 
         // Generar ID automático
-        String^ id = idCounter.ToString();
-        idCounter++;
+        ProyectoPOO::Modelos::Paciente^ paciente = gcnew ProyectoPOO::Modelos::Paciente();
+        paciente->Cedula = this->textBoxCedula->Text->Trim();
+        paciente->Nombre = this->textBoxNombre->Text->Trim();
+        paciente->Correo = this->textBoxCorreo->Text->Trim();
+        paciente->Motivo = this->textBoxMotivo->Text->Trim();
+        paciente->TipoSangre = this->comboBoxSangre->SelectedItem->ToString();
+        paciente->Alergias = this->textBoxAlergias->Text->Trim();
+        paciente->Enfermedades = this->textBoxEnfermedades->Text->Trim();
+        paciente->SeguroMedico = this->textBoxSeguro->Text->Trim();
+        paciente->MedicoTratante = this->textBoxMedico->Text->Trim();
 
-        // Crear un diccionario con los datos del paciente
-        auto paciente = gcnew System::Collections::Generic::Dictionary<System::String^, System::String^>();
-        paciente[L"id"] = id;
-        paciente[L"cedula"] = this->textBoxCedula->Text->Trim();
-        paciente[L"nombre"] = this->textBoxNombre->Text->Trim();
-        paciente[L"correo"] = this->textBoxCorreo->Text->Trim();
-        paciente[L"motivo"] = this->textBoxMotivo->Text->Trim();
-        paciente[L"sangre"] = this->comboBoxSangre->SelectedItem->ToString();
-        paciente[L"alergias"] = this->textBoxAlergias->Text->Trim();
-        paciente[L"enfermedades"] = this->textBoxEnfermedades->Text->Trim();
-        paciente[L"seguro"] = this->textBoxSeguro->Text->Trim();
-        paciente[L"medico"] = this->textBoxMedico->Text->Trim();
-        paciente[L"estado"] = L"Activo";
-
-        // Agregar a la lista
-        this->pacientes->Add(paciente);
-
-        // Guardar inmediatamente para que UsuariosForm pueda encontrar el paciente
-        GuardarPacientes();
+        try {
+            controlador->Agregar(paciente);
+        }
+        catch (System::Exception^ ex) {
+            this->labelMensaje->ForeColor = System::Drawing::Color::Red;
+            this->labelMensaje->Text = ex->Message;
+            return;
+        }
 
         // Mostrar mensaje de exito
         this->labelMensaje->ForeColor = System::Drawing::Color::Green;
-        this->labelMensaje->Text = L"Paciente #" + id + L" guardado exitosamente";
+        this->labelMensaje->Text = L"Paciente #" + paciente->Id + L" guardado exitosamente";
 
         // Limpiar campos
         this->textBoxCedula->Clear();
@@ -498,10 +494,7 @@ namespace ProyectoPOO {
     }
     private: System::Void pacienteForm_Load(System::Object^ sender, System::EventArgs^ e) {
         // Inicializar la lista de pacientes
-        this->pacientes = gcnew System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>();
-
-        // Cargar pacientes guardados
-        CargarPacientes();
+        controlador->Recargar();
 
         // Configurar columnas del DataGridView Ver Pacientes
         this->dataGridViewPacientes->ColumnCount = 6;
@@ -532,14 +525,14 @@ namespace ProyectoPOO {
     private: System::Void ActualizarGridPacientes() {
         this->dataGridViewPacientes->Rows->Clear();
 
-        for each (auto paciente in this->pacientes) {
+        for each (ProyectoPOO::Modelos::Paciente^ paciente in controlador->ObtenerTodos()) {
             array<System::String^>^ row = gcnew array<System::String^>(6);
-            row[0] = paciente[L"id"];
-            row[1] = paciente[L"cedula"];
-            row[2] = paciente[L"nombre"];
-            row[3] = paciente[L"correo"];
-            row[4] = paciente[L"motivo"];
-            row[5] = paciente[L"estado"];
+            row[0] = paciente->Id;
+            row[1] = paciente->Cedula;
+            row[2] = paciente->Nombre;
+            row[3] = paciente->Correo;
+            row[4] = paciente->Motivo;
+            row[5] = paciente->Estado;
 
             this->dataGridViewPacientes->Rows->Add(row);
         }
@@ -547,18 +540,18 @@ namespace ProyectoPOO {
     private: System::Void ActualizarGridInformacion() {
         this->dataGridViewInformacion->Rows->Clear();
 
-        for each (auto paciente in this->pacientes) {
+        for each (ProyectoPOO::Modelos::Paciente^ paciente in controlador->ObtenerTodos()) {
             array<System::String^>^ row = gcnew array<System::String^>(10);
-            row[0] = paciente[L"id"];
-            row[1] = paciente[L"nombre"];
-            row[2] = paciente[L"sangre"];
-            row[3] = paciente[L"alergias"];
-            row[4] = paciente[L"enfermedades"];
-            row[5] = paciente[L"seguro"];
-            row[6] = paciente[L"medico"];
-            row[7] = paciente[L"cedula"];
-            row[8] = paciente[L"correo"];
-            row[9] = paciente[L"estado"];
+            row[0] = paciente->Id;
+            row[1] = paciente->Nombre;
+            row[2] = paciente->TipoSangre;
+            row[3] = paciente->Alergias;
+            row[4] = paciente->Enfermedades;
+            row[5] = paciente->SeguroMedico;
+            row[6] = paciente->MedicoTratante;
+            row[7] = paciente->Cedula;
+            row[8] = paciente->Correo;
+            row[9] = paciente->Estado;
 
             this->dataGridViewInformacion->Rows->Add(row);
         }
@@ -569,81 +562,7 @@ namespace ProyectoPOO {
         this->Close();
     }
     private: System::Void pacienteForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
-        // Guardar datos al cerrar
-        GuardarPacientes();
-    }
-    private: System::Void GuardarPacientes() {
-        try {
-            System::IO::StreamWriter^ writer = gcnew System::IO::StreamWriter(archivoGuardado, false, System::Text::Encoding::UTF8);
-
-            // Escribir el contador de IDs
-            writer->WriteLine(idCounter.ToString());
-
-            // Escribir cada paciente
-            for each (auto paciente in this->pacientes) {
-                writer->WriteLine(paciente[L"id"] + L"|" + 
-                    paciente[L"cedula"] + L"|" + 
-                    paciente[L"nombre"] + L"|" + 
-                    paciente[L"correo"] + L"|" + 
-                    paciente[L"motivo"] + L"|" + 
-                    paciente[L"sangre"] + L"|" + 
-                    paciente[L"alergias"] + L"|" + 
-                    paciente[L"enfermedades"] + L"|" + 
-                    paciente[L"seguro"] + L"|" + 
-                    paciente[L"medico"] + L"|" + 
-                    paciente[L"estado"]);
-            }
-
-            writer->Close();
-            delete writer;
-        }
-        catch (System::Exception^ ex) {
-            // Silenciosamente no hacer nada si hay error al guardar
-        }
-    }
-    private: System::Void CargarPacientes() {
-        try {
-            if (System::IO::File::Exists(archivoGuardado)) {
-                System::IO::StreamReader^ reader = gcnew System::IO::StreamReader(archivoGuardado, System::Text::Encoding::UTF8);
-                System::String^ linea;
-
-                // Leer el contador de IDs
-                linea = reader->ReadLine();
-                if (linea != nullptr) {
-                    idCounter = System::Int32::Parse(linea);
-                }
-
-                // Leer cada paciente
-                while ((linea = reader->ReadLine()) != nullptr) {
-                    if (linea->Length > 0) {
-                        array<System::String^>^ datos = linea->Split('|');
-
-                        if (datos->Length == 11) {
-                            auto paciente = gcnew System::Collections::Generic::Dictionary<System::String^, System::String^>();
-                            paciente[L"id"] = datos[0];
-                            paciente[L"cedula"] = datos[1];
-                            paciente[L"nombre"] = datos[2];
-                            paciente[L"correo"] = datos[3];
-                            paciente[L"motivo"] = datos[4];
-                            paciente[L"sangre"] = datos[5];
-                            paciente[L"alergias"] = datos[6];
-                            paciente[L"enfermedades"] = datos[7];
-                            paciente[L"seguro"] = datos[8];
-                            paciente[L"medico"] = datos[9];
-                            paciente[L"estado"] = datos[10];
-
-                            this->pacientes->Add(paciente);
-                        }
-                    }
-                }
-
-                reader->Close();
-                delete reader;
-            }
-        }
-        catch (System::Exception^ ex) {
-            // Silenciosamente no hacer nada si hay error al cargar
-        }
+        controlador->GuardarCambios();
     }
     };
 }
